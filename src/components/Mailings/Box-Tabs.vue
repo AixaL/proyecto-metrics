@@ -39,3 +39,18 @@
         </div>
     </div>
 </template>
+<script>
+import { useStore} from 'vuex'
+import {onMounted} from 'vue'
+export default {
+    name: 'App',
+    components:{},
+    setup() {
+        const store = useStore()
+        onMounted(() => {
+            store.dispatch('getMailings')
+        
+        })
+    }
+}
+</script>

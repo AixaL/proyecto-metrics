@@ -15,9 +15,9 @@
                 </button>
             </div>
 
-            <div class=" hidden origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+            <div class=" origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
                 <div v-for="agencia in projects" :key="agencia.id" class="py-1 flex flex-row p-2 pt-2 pb-2 hover:bg-gray-100" role="none">
-                    <div class="w-9 ml-2 flex flex-start ">
+                    <div v-on:click="clickProyecto(agencia.key)" class="w-9 ml-2 flex flex-start ">
                         <img :src=" agencia.image" alt="">
                     </div>
                     <div class="flex">
@@ -72,7 +72,13 @@
             }
            
             // key: 'eyJhbGciOiJIUzI1NiJ9.eyJzZWN1cml0eUNvbnRleHQiOiJ7XCJhcGlLZXlcIjpcIjU1ZjMxNDhhLTEzZTgtNDk2ZS05NWZhLTA0ZWQ0ZTE2Mjc3Y1wiLFwicHJvamVjdElkXCI6Mzk2MDk2fSJ9.GbkOOVTm0ck0YY3U2eda4vva7CLYC5tyxW1UAfmWTM0'
-        }
+        },
+        methods: {
+             clickProyecto(key){
+                 
+                 console.log(key)
+            }
+        },
       
   }
 
