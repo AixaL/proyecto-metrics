@@ -2,10 +2,10 @@
 <div>
   <Nav msg="Welcome to Your Vue.js App"/>
   <div class='grid grid-cols-2 bg-gray-100 p-5'>
-    <div class="pr-2 mt-3">
+    <div class="pr-2 mt-20">
        <BoxTabs/>  
     </div>
-    <div class="pl-2 mt-3">
+    <div class="pl-2 mt-20">
       <BoxPrev/>
     </div>
   </div>

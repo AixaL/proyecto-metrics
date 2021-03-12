@@ -42,6 +42,13 @@
                 <button class="text-blue-600 bg-gray-100 w-7 h-7 flex justify-center items-center rounded-sm  hover:text-white hover:bg-blue-600 focus:border-0  focus:border-transparent focus:outline-none"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg></button>
                 <button class="ml-2 text-gray-500 bg-gray-100 w-7 h-7 flex justify-center items-center rounded-sm hover:text-white hover:bg-blue-600 focus:border-0 focus:outline-none"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg></button>
             </div>
+
+            <div class=" col-span-4 border-2 border-gray-300 rounded-md w-full min-h-screen" >
+                <!-- <iframe class="w-full h-screen" src="https://codingpotions.com/vue-props" frameborder="0"></iframe> -->
+                <iframe frameborder="0" width="100%" height="100%" class="" src="http://www.adpdev.com/adp/mx/email-metrics/ver-email.php?c=3465&swapnumber=true&utm_source=adpmx&utm_medium=email&utm_campaign=adpmx_3465&adpmetrics_u=cmxVVXZNWlBlY1Zhaw#" ></iframe>
+            </div>
+            
+            <div class=""></div>
         
     </div>
 </template>
