@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full bg-white fixed shadow-sm">
+  <div class="w-full bg-white fixed shadow-sm z-50">
   <div class="max-w-12xl mx-auto ">
     <div class="flex justify-between items-center border-b-2 border-gray-100 py-2 md:justify-start md:space-x-10 ">
       <div class="flex justify-start lg:flex-none ">

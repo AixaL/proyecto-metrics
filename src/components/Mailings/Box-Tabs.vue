@@ -8,19 +8,26 @@
         <div class="bg-white w-full">
             <div class="p-3">
                 <div class="grid grid-cols-4 bg-gray-100 text-xs p-2">
-                    <div class=" text-gray-600 text-left self-center font-semibold justify-center "><p class="float-left mr-2 self-center">Ordenar por</p><svg class="flex w-4 h-4 self-center" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></div>
-                    <div></div>
+                    <div v-on:click="visible=true" class="cursor-pointer col-span-2  text-gray-600 text-left self-center font-semibold justify-center "><p class="float-left mr-2 self-center">{{orden}}</p><svg class="flex w-4 h-4 self-center" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></div>
                     <div></div>
                     <div class="text-gray-500 text-right text-xs self-center">Resultados: {{}}</div>
                     <!-- mailings.data.length -->
                 </div>
+                <div v-if="visible" v-on:mouseleave="visible=false" class="absolute bg-gray-100 z-10 rounded-sm shadow-md">
+                <ul class="text-left">
+                    <li v-on:click="Ordenar('Fecha (Más reciente)', 1)" class="order-menu">Fecha (Mas reciente)</li>
+                    <li v-on:click="Ordenar('Fecha (Menos reciente)', 2)" class="order-menu">Fecha (Menos reciente)</li>
+                    <li v-on:click="orden='A a Z'; visible=false" class="order-menu">A a Z</li>
+                    <li v-on:click="orden='Z a A'; visible=false" class="order-menu">Z a A</li>
+                </ul>
             </div>
+            </div>
+            
             <div >
                  <MailingsBox
                     v-for="mail of mailings.data" :key="mail.emailId" :name="mail.name" :time="mail.updatedTime"
                     :id="mail.emailId"
                  /> 
-                 
             </div>
         </div>
     </div>
@@ -33,6 +40,21 @@ export default {
     name: 'App',
     components:{
         MailingsBox,
+    },
+    data() {
+        return {
+            visible: false,
+            orden: 'Ordenar por',
+            idOrden: 0
+        }
+    },
+    methods: {
+        Ordenar(texto, id){
+            this.orden=texto; 
+            this.visible=false;
+            this.idOrden=id
+
+        }
     },
     setup() {
         const store = useStore()

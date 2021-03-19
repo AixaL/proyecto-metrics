@@ -4,17 +4,17 @@
                 <p class="text-left text-sm">Plantilla General V.0.1</p>
             </div>
             <div class="flex justify-center items-center">
-                <button class="text-sm float-left flex justify-center items-center text-blue-600 rounded-md bg-gray-100 h-6 w-36 hover:text-white hover:bg-blue-600 focus:outline-none"><p class="float-left text-xs">Editar en Stripo</p><svg class="w-4 h-4 float-left ml-1 self-center" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg></button>
+                <button class="btn-edit-arch"><p class="float-left text-xs">Editar en Stripo</p><svg class="w-4 h-4 float-left ml-1 self-center" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg></button>
             </div>
             <div class="flex justify-center items-center">
-                <button class="text-sm float-left flex justify-center items-center text-blue-600 rounded-md bg-gray-100 h-6 w-36 hover:text-white hover:bg-blue-600 focus:outline-none"> <p class="float-left text-xs ">Archivar </p> <svg class="w-4 h-4 float-left ml-1 self-center" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-2m-4-1v8m0 0l3-3m-3 3L9 8m-5 5h2.586a1 1 0 01.707.293l2.414 2.414a1 1 0 00.707.293h3.172a1 1 0 00.707-.293l2.414-2.414a1 1 0 01.707-.293H20"></path></svg></button>
+                <button class="btn-edit-arch"> <p class="float-left text-xs ">Archivar </p> <svg class="w-4 h-4 float-left ml-1 self-center" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-2m-4-1v8m0 0l3-3m-3 3L9 8m-5 5h2.586a1 1 0 01.707.293l2.414 2.414a1 1 0 00.707.293h3.172a1 1 0 00.707-.293l2.414-2.414a1 1 0 01.707-.293H20"></path></svg></button>
             </div>
             <div class="col-span-4 h-1 border-b-2 border-gray-100"></div>
 
             <div class="col-span-4">
-                <p class="text-left text-sm mb-2">Titulo de la campaña</p>
+                <p class="text-left text-sm mb-2">Título de la campaña</p>
                 <form class="relative ">
-                <input class="focus:border-light-blue-500 focus:ring-1 focus:ring-light-blue-500 focus:outline-none w-full text-sm text-black placeholder-gray-600 border border-gray-200 rounded-md py-2 pl-4 h-10" type="text" aria-label="Buscar por Campaña, titulo o plantilla" placeholder="Buscar por Campaña, titulo o plantilla" />
+                <input class="focus:border-light-blue-500 focus:ring-1 focus:ring-light-blue-500 focus:outline-none w-full text-sm text-black placeholder-gray-600 border border-gray-200 rounded-md py-2 pl-4 h-10" type="text" aria-label="Título" placeholder="Título" />
             </form>
             </div>
             <div class="col-span-2">

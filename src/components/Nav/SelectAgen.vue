@@ -15,7 +15,7 @@
                 </button>
             </div>
 
-            <div v-if="visible" class=" origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+            <div v-if="visible" v-on:mouseleave="visible=false" class=" origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
                 <div v-for="agencia in projects" :key="agencia.id" v-on:click="clickProyecto(agencia)" class="py-1 flex flex-row p-2 pt-2 pb-2 hover:bg-gray-100" role="none">
                     <div class="w-9 ml-2 flex flex-start ">
                         <img :src=" agencia.image" alt="">
@@ -82,6 +82,7 @@
                 this.nombreAgencia=agen.name
                 this.imgAgencia=agen.image
                 this.visible=false
+                console.log(agen.key)
             }
         },
         // setup() {
