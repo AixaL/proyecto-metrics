@@ -4,17 +4,19 @@ import axios from 'axios'
 export default createStore({
   state: {
     mailings:[],
+    search: '',
+    agenciaName:'Volvo',
     StripoKey:'eyJhbGciOiJIUzI1NiJ9.eyJzZWN1cml0eUNvbnRleHQiOiJ7XCJhcGlLZXlcIjpcIjVkMzJmYWU5LTcyOGUtNGFmNy05MGU2LTM4MWI5OWI1MWE3YVwiLFwicHJvamVjdElkXCI6Mjc4NTcwfSJ9.ICQ9jJGnLRLI85QWCsMC-CzSt7XpN1grWcmaq_Zo6d0'
   },
   mutations: {
     setMailings(state, payload){
       state.mailings= payload
-      console.log(state.mailings)
     },
     setStripoKey(state, key){
       state.StripoKey = key
-      console.log(state.StripoKey)
-      console.log(key)
+    },
+    setAgenciaName(state, name){
+      state.agenciaName = name
     }
   },
   actions: {
@@ -40,6 +42,23 @@ export default createStore({
     getStripoKey({commit}, key){
         commit('setStripoKey', key)
     }
+  },
+  getters:{
+    filterAZ: state =>{
+      return state.mailings.filter(mailings => mailings.updatedTime)
+    },
+    // filterZA: state =>{
+
+    // },
+    // filterDateR: state =>{
+
+    // },
+    // filterDateL: state => {
+
+    // },
+    // searchBar: state => {
+
+    // }
   },
   modules: {
   }

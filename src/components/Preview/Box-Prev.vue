@@ -18,21 +18,29 @@
             </form>
             </div>
             <div class="col-span-2">
-                <button type="button" class="flex text-left  w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:border-light-blue-500 focus:ring-1 focus:ring-light-blue-500 focus:outline-none " id="options-menu" aria-expanded="true" aria-haspopup="true">
+                <button v-on:click="visible=true, getAgencias, agenciaActual='Seleccionar agencia'" type="button" class="flex text-left  w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:border-light-blue-500 focus:ring-1 focus:ring-light-blue-500 focus:outline-none " id="options-menu" aria-expanded="true" aria-haspopup="true">
             
                     
-              <div class=" flex justify-start w-10/12 "><p class="justify-start text-gray-700">Seleccionar agencia</p></div>
+              <div class=" flex justify-start w-10/12 "><p class="justify-start text-gray-700">{{agenciaActual}}</p></div>
               <div class=" flex justify-end w-2-12">
                   <svg class="mr-1 ml-8 h-5 w-5 flex justify-end justify-self-end place-content-end justify-items-end place-self-end" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                     <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                 </svg>
               </div>
-                
                 </button>
             </div>
+            
             <div class="col-span-2 flex h-10">
                 <button class="flex justify-center self-center items-center  w-full bg-green-700 h-9 rounded-md text-white text-sm focus:outline-none hover:bg-green-500">Crear Campaña</button>
             </div>
+            <div v-if="visible" v-on:mouseleave="visible=false" class=" col-span-2 -mt-4">
+                     <div class="bg-white z-10 w-full p-2 shadow-sm text-left">
+                        <ul v-for="agencia in getAgencias" v-bind:key="agencia.id">
+                            <li v-on:click="agenciaActual=agencia.name,visible=false" class="p-1 cursor-pointer font-semibold hover:bg-gray-100 hover:text-blue-600">{{agencia.name}}</li>
+                        </ul>
+                    </div>
+            </div>
+            <div class="hidden col-span-2"></div>
             <div class="col-span-4 border-gray-100 border-b-2"></div>
 
             <div class="col-span-2 text-left text-sm">
@@ -52,3 +60,96 @@
         
     </div>
 </template>
+
+<script>
+export default {
+    data() {
+        return {
+            visible: false,
+            agenciaActual:'Seleccionar agencia',
+            agencias: {
+                Volvo:{
+                    name:'Volvo',
+                    agencia:[
+                        {
+                            id:0,
+                            name:'Volvo 1'                        
+                        },
+                        {
+                            id:1,
+                            name:'Volvo 2'                        
+                        },
+                        {
+                            id:2,
+                            name:'Volvo 3'                        
+                        },
+                    ]
+                },
+                BMW:{
+                    name:'BMW',
+                    agencia:[
+                        {
+                            id:0,
+                            name:'BMW 1'                        
+                        },
+                        {
+                            id:1,
+                            name:'BMW 2'                        
+                        },
+                        {
+                            id:2,
+                            name:'BMW 3'                        
+                        },
+                    ]
+                },
+                Audi:{
+                    name:'Audi',
+                    agencia:[
+                        {
+                            id:0,
+                            name:'Audi 1'                        
+                        },
+                        {
+                            id:1,
+                            name:'Audi 2'                        
+                        },
+                        {
+                            id:2,
+                            name:'Audi 3'                        
+                        },
+                    ]
+                },
+                Mazda:{
+                    name:'Mazda',
+                    agencia:[
+                        {
+                            id:0,
+                            name:'Mazda 1'                        
+                        },
+                        {
+                            id:1,
+                            name:'Mazda 2'                        
+                        },
+                        {
+                            id:2,
+                            name:'Mazda 3'                        
+                        },
+                    ]
+                }
+            }
+        }
+    },
+    methods: {
+       
+    },
+    computed:{
+        
+         getAgencias(){
+            let agenName= this.$store.state.agenciaName;
+            let agencias=this.agencias[agenName].agencia
+            console.log(agenName)
+            return(agencias)
+        }
+    }
+}
+</script>

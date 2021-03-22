@@ -16,7 +16,7 @@
             </div>
 
             <div v-if="visible" v-on:mouseleave="visible=false" class=" origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-                <div v-for="agencia in projects" :key="agencia.id" v-on:click="clickProyecto(agencia)" class="py-1 flex flex-row p-2 pt-2 pb-2 hover:bg-gray-100" role="none">
+                <div v-on:click="clickProyecto(agencia)" v-for="agencia in projects" :key="agencia.id"  class="py-1 flex flex-row p-2 pt-2 pb-2 hover:bg-gray-100" role="none">
                     <div class="w-9 ml-2 flex flex-start ">
                         <img :src=" agencia.image" alt="">
                     </div>
@@ -51,25 +51,25 @@
                     Volvo:{
                         id:1,
                         name:'Volvo',
-                        key:'eyJhbGciOiJIUzI1NiJ9.eyJzZWN1cml0eUNvbnRleHQiOiJ7XCJhcGlLZXlcIjpcIjU1ZjMxNDhhLTEzZTgtNDk2ZS05NWZhLTA0ZWQ0ZTE2Mjc3Y1wiLFwicHJvamVjdElkXCI6Mzk2MDk2fSJ9.GbkOOVTm0ck0YY3U2eda4vva7CLYC5tyxW1UAfmWTM0',
-                        image:'http://localhost:8080/img/volvo.23aa86f4.png'
+                        key:'eyJhbGciOiJIUzI1NiJ9.eyJzZWN1cml0eUNvbnRleHQiOiJ7XCJhcGlLZXlcIjpcIjVkMzJmYWU5LTcyOGUtNGFmNy05MGU2LTM4MWI5OWI1MWE3YVwiLFwicHJvamVjdElkXCI6Mjc4NTcwfSJ9.ICQ9jJGnLRLI85QWCsMC-CzSt7XpN1grWcmaq_Zo6d0',
+                        image:'https://pbs.twimg.com/profile_images/1353905413557776384/1xd7nron_400x400.jpg'
                     },
                     Mazda:{
                         id:2,
                         name:'Mazda',
-                        key:'eyJhbGciOiJIUzI1NiJ9.eyJzZWN1cml0eUNvbnRleHQiOiJ7XCJhcGlLZXlcIjpcIjU1ZjMxNDhhLTEzZTgtNDk2ZS05NWZhLTA0ZWQ0ZTE2Mjc3Y1wiLFwicHJvamVjdElkXCI6Mzk2MDk2fSJ9.GbkOOVTm0ck0YY3U2eda4vva7CLYC5tyxW1UAfmWTM0',
+                        key:'eyJhbGciOiJIUzI1NiJ9.eyJzZWN1cml0eUNvbnRleHQiOiJ7XCJhcGlLZXlcIjpcIjljOTU2ODE4LTY2NTktNGQ0OC05NWUwLTYyYjZjMWQ4MWE3YVwiLFwicHJvamVjdElkXCI6MzkwMDY4fSJ9.ggN0hbcPhOFNK1TTByqTUweXXelwcDUSi-jWjBzUB28',
                         image:'https://www.focus2move.com/wp-content/uploads/2016/08/mazda-black-vector-logo-400x400-1.png'
                     },
                     BMW:{
                         id:3,
                         name:'BMW',
-                        key:'eyJhbGciOiJIUzI1NiJ9.eyJzZWN1cml0eUNvbnRleHQiOiJ7XCJhcGlLZXlcIjpcIjU1ZjMxNDhhLTEzZTgtNDk2ZS05NWZhLTA0ZWQ0ZTE2Mjc3Y1wiLFwicHJvamVjdElkXCI6Mzk2MDk2fSJ9.GbkOOVTm0ck0YY3U2eda4vva7CLYC5tyxW1UAfmWTM0',
+                        key:'eyJhbGciOiJIUzI1NiJ9.eyJzZWN1cml0eUNvbnRleHQiOiJ7XCJhcGlLZXlcIjpcIjU4ZDFlYmQ0LTE0OWMtNDc0Yy05MmY0LWQzMmRjZmI5MWFiMVwiLFwicHJvamVjdElkXCI6NDA1MTY0fSJ9.rJOPEVI1aGCO8eH8oXCnf_Au9uqhVN437iLB8flcWyg',
                         image:'https://cdn.worldvectorlogo.com/logos/logo-bmw-2020.svg'
                     },
-                    Toyota:{
+                    Audi:{
                         id:4,
-                        name:'Toyota',
-                        key:'eyJhbGciOiJIUzI1NiJ9.eyJzZWN1cml0eUNvbnRleHQiOiJ7XCJhcGlLZXlcIjpcIjU1ZjMxNDhhLTEzZTgtNDk2ZS05NWZhLTA0ZWQ0ZTE2Mjc3Y1wiLFwicHJvamVjdElkXCI6Mzk2MDk2fSJ9.GbkOOVTm0ck0YY3U2eda4vva7CLYC5tyxW1UAfmWTM0',
+                        name:'Audi',
+                        key:'eyJhbGciOiJIUzI1NiJ9.eyJzZWN1cml0eUNvbnRleHQiOiJ7XCJhcGlLZXlcIjpcIjhlNGVhZmI5LTA3NGMtNGJiMy1hYWNkLWQ2NDI3Y2QwMWQ2OFwiLFwicHJvamVjdElkXCI6NDA2MDAxfSJ9.hoX6DBGq7DKL0UC5jlONUGH0o3QiO6gNz1QGWjzaIqU',
                         image:'https://i.pinimg.com/originals/13/ab/5f/13ab5fe6c536ff7125432ece35b8b217.png'
                     },
                 }
@@ -82,9 +82,17 @@
                 this.nombreAgencia=agen.name
                 this.imgAgencia=agen.image
                 this.visible=false
-                console.log(agen.key)
-            }
+                this.$store.commit('setStripoKey', agen.key)
+                this.$store.commit('setAgenciaName', agen.name)
+                this.$store.dispatch('getMailings')
+                // console.log(agen.key)
+                // ...Vuex.mapMutations([])
+            },
+            
         },
+        computed:{
+            
+        }
         // setup() {
         //     const store = useStore()
         // }
