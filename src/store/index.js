@@ -4,6 +4,7 @@ import axios from 'axios'
 export default createStore({
   state: {
     mailings:[],
+    mail:'',
     search: '',
     agenciaName:'Volvo',
     StripoKey:'eyJhbGciOiJIUzI1NiJ9.eyJzZWN1cml0eUNvbnRleHQiOiJ7XCJhcGlLZXlcIjpcIjVkMzJmYWU5LTcyOGUtNGFmNy05MGU2LTM4MWI5OWI1MWE3YVwiLFwicHJvamVjdElkXCI6Mjc4NTcwfSJ9.ICQ9jJGnLRLI85QWCsMC-CzSt7XpN1grWcmaq_Zo6d0'
@@ -17,6 +18,10 @@ export default createStore({
     },
     setAgenciaName(state, name){
       state.agenciaName = name
+    },
+    setMail(state, mailS){
+      console.log(mailS)
+      state.mail = mailS
     }
   },
   actions: {

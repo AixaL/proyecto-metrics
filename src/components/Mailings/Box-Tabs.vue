@@ -5,7 +5,7 @@
             <div class="tab"><svg class="w-5 h-5 float-left mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg> Campañas</div>
             <div class="col-span-4"></div>
         </div>
-        <div class="bg-white w-full">
+        <div class="bg-white w-full min-h-screen">
             <div class="p-3">
                 <div class="grid grid-cols-4 bg-gray-100 text-xs p-2">
                     <div v-on:click="visible=true" class="cursor-pointer col-span-2  text-gray-600 text-left self-center font-semibold justify-center "><p class="float-left mr-2 self-center">{{orden}}</p><svg class="flex w-4 h-4 self-center" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></div>
@@ -26,7 +26,7 @@
             <div >
                  <MailingsBox
                     v-for="mail of mailings.data" :key="mail.emailId" :name="mail.name" :time="mail.updatedTime"
-                    :id="mail.emailId"
+                    :id="mail.emailId" :editStripo="mail.editorUrl" :mailS="mail"
                  /> 
             </div>
         </div>
