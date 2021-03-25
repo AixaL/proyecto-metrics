@@ -4,6 +4,7 @@ import axios from 'axios'
 export default createStore({
   state: {
     mailings:[],
+    moduleS: false,
     mail:'',
     search: '',
     agenciaName:'Volvo',

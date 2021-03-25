@@ -28,4 +28,13 @@
     .li-edit-arch{
         @apply flex justify-start items-center  p-2 hover:bg-gray-200 hover:text-blue-700 text-sm font-semibold;
     }
+    .buttonCreate{
+        @apply flex justify-center self-center items-center  w-full bg-green-700 h-9 rounded-md text-white text-sm focus:outline-none hover:bg-green-500;
+    }
+    .buttonGoStripo{
+        @apply  bg-blue-500  hover:bg-blue-800;
+    }
+    .buttonCancel{
+        @apply flex justify-center self-center items-center  w-full bg-gray-200 h-9 rounded-md text-black text-sm focus:outline-none hover:bg-blue-800 hover:text-white;
+    }
 }

@@ -1,8 +1,8 @@
 <template>
     <div>
     
-        <div class="mailings-box" v-on:click="Vermailing(mailS)">
-            <div class="w-full text-gray-700 font-semibold text-md z-0">
+        <div class=" mailings-box"  v-on:click="Vermailing(mailS)">
+            <div class="w-full text-gray-700 font-semibold text-md z-0 ">
                 <h4 v-on:click="verMail"  class="float-left">{{name}}</h4>
                 <button v-on:click="visible=true" class="btn-mailings"><svg class="w-4 h-4 self-center place-self-center justify-self-center" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"></path></svg></button>
             </div>
@@ -42,6 +42,8 @@ export default {
     data() {
         return {
             visible: false,
+            bgc: 'bg-white',
+            isActive:false
         }
     },
     // } ['time','name'],
@@ -59,3 +61,6 @@ export default {
     // }
 }
 </script>
+
+<style>
+</style>

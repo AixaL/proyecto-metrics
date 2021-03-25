@@ -4,12 +4,10 @@
                 <p class="text-left text-lg font-bold text-black">{{mail.name}}</p>
             </div>
             <div class="flex justify-center items-center">
-                <button class="btn-edit-arch">
-                    <a :href="mail.editorUrl" target="_blank">
+                <button v-on:click="editS" class="btn-edit-arch">
                         <p class="float-left text-xs">Editar en Stripo</p>
                         <svg class="w-4 h-4 float-left ml-1 self-center" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                         </svg>
-                    </a>
                 </button>
             </div>
             <div class="flex justify-center items-center">
@@ -37,12 +35,12 @@
             </div>
             
             <div class="col-span-2 flex h-10">
-                <button class="flex justify-center self-center items-center  w-full bg-green-700 h-9 rounded-md text-white text-sm focus:outline-none hover:bg-green-500">Crear Campaña</button>
+                <button class="buttonCreate">Crear Campaña</button>
             </div>
             <div v-if="visible" v-on:mouseleave="visible=false" class=" col-span-2 -mt-4">
-                     <div class="bg-white z-10 w-full p-2 shadow-sm text-left">
+                     <div class="bg-white z-10 w-full shadow-md text-left">
                         <ul v-for="agencia in getAgencias" v-bind:key="agencia.id">
-                            <li v-on:click="agenciaActual=agencia.name,visible=false" class="p-1 cursor-pointer font-semibold hover:bg-gray-100 hover:text-blue-600">{{agencia.name}}</li>
+                            <li v-on:click="agenciaActual=agencia.name,visible=false" class="p-2 cursor-pointer font-semibold hover:bg-gray-100 hover:text-blue-600 border-b-2 border-gray-100">{{agencia.name}}</li>
                         </ul>
                     </div>
             </div>
@@ -148,6 +146,14 @@ export default {
         }
     },
     methods: {
+        editS(){
+            if(this.$store.state.mail==''){
+                alert("Por favor Selecciona un mail")
+            }else{
+                 this.$store.state.moduleS=true
+            }
+           
+        }
       
     },
     computed: {
