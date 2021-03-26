@@ -1,12 +1,13 @@
 <template>
 <div>
   <ModuleS v-if="$store.state.moduleS"/>
-  <Nav msg="Welcome to Your Vue.js App"/>
-  <div class='grid grid-cols-2 bg-gray-100 p-5'>
-    <div class="pr-2 mt-20">
+  <ModuleC v-if="$store.state.moduleC"/>
+  <Nav/>
+  <div class='grid grid-cols-9 bg-gray-100 p-5'>
+    <div class="pr-2 mt-20 col-span-4">
        <BoxTabs />  
     </div>
-    <div class="pl-2 mt-20">
+    <div class="pl-2 mt-20 col-span-5">
       <BoxPrev/>
     </div>
   </div>
@@ -20,6 +21,7 @@ import Nav from '@/components/Nav/Nav.vue'
 import BoxTabs from '@/components/Mailings/Box-Tabs.vue'
 import BoxPrev from '@/components/Preview/Box-Prev.vue'
 import ModuleS from '@/components/Modules/moduleStripo.vue'
+import ModuleC from '@/components/Modules/moduleCreate.vue'
 
 export default {
   name: 'Home',
@@ -27,7 +29,8 @@ export default {
     Nav,
     BoxTabs,
     BoxPrev,
-    ModuleS
+    ModuleS,
+    ModuleC
   }
 }
 </script>

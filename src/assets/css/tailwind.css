@@ -17,13 +17,13 @@
         @apply float-right bg-gray-100 rounded-md w-8 flex justify-center focus:outline-none hover:bg-blue-400 hover:text-white;
     }
     .menu-mailings{
-        @apply relative flex items-end -mt-7 w-36 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none ml-px;
+        @apply relative flex items-end -mt-7 w-36 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none ml-px h-full;
     }
     .order-menu{
         @apply text-sm px-4 py-2 cursor-pointer hover:bg-gray-50 hover:text-blue-600 ;
     }
     .btn-edit-arch{
-        @apply text-sm float-left flex justify-center items-center text-blue-600 rounded-md bg-gray-100 h-6 w-36 hover:text-white hover:bg-blue-600 focus:outline-none;
+        @apply text-sm float-left flex justify-center items-center text-blue-600 rounded-md bg-gray-200 h-6 w-36 hover:text-white hover:bg-blue-600 focus:outline-none;
     }
     .li-edit-arch{
         @apply flex justify-start items-center  p-2 hover:bg-gray-200 hover:text-blue-700 text-sm font-semibold;

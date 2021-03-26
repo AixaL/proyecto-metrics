@@ -16,9 +16,9 @@
             <div class="col-span-4 h-1 border-b-2 border-gray-100"></div>
 
             <div class="col-span-4">
-                <p class="text-left text-sm mb-2">Título de la campaña</p>
+                <p class="text-left text-sm mb-2">Titulo de la Campaña</p>
                 <form class="relative ">
-                <input class="focus:border-light-blue-500 focus:ring-1 focus:ring-light-blue-500 focus:outline-none w-full text-sm text-black placeholder-gray-600 border border-gray-200 rounded-md py-2 pl-4 h-10" type="text" aria-label="Título" placeholder="Título" />
+                <input class="focus:border-light-blue-500 focus:ring-1 focus:ring-light-blue-500 focus:outline-none w-full text-sm text-black placeholder-gray-600 border border-gray-200 rounded-md py-2 pl-4 h-10" type="text" aria-label="Título" placeholder="Título"  />
             </form>
             </div>
             <div class="col-span-2">
@@ -35,30 +35,33 @@
             </div>
             
             <div class="col-span-2 flex h-10">
-                <button class="buttonCreate">Crear Campaña</button>
+                <button v-on:click="CreateCamp" class="buttonCreate">Crear Campaña</button>
             </div>
             <div v-if="visible" v-on:mouseleave="visible=false" class=" col-span-2 -mt-4">
                      <div class="bg-white z-10 w-full shadow-md text-left">
                         <ul v-for="agencia in getAgencias" v-bind:key="agencia.id">
-                            <li v-on:click="agenciaActual=agencia.name,visible=false" class="p-2 cursor-pointer font-semibold hover:bg-gray-100 hover:text-blue-600 border-b-2 border-gray-100">{{agencia.name}}</li>
+                            <li v-on:click="SelectAgenciaA(agencia)" class="p-2 cursor-pointer font-semibold hover:bg-gray-100 hover:text-blue-600 border-b-2 border-gray-100">{{agencia.name}}</li>
                         </ul>
                     </div>
             </div>
             <div class="hidden col-span-2"></div>
             <div class="col-span-4 border-gray-100 border-b-2"></div>
 
-            <div class="col-span-2 text-left text-sm">
-                <p>Vista previa</p>
+            <div class="text-left text-md w-4/6 flex items-center">
+                <p class="font-semibold">Vista previa</p>
             </div>
-            <div class="col-span-2 flex justify-end pr-4">
-                <button class="text-blue-600 bg-gray-100 w-7 h-7 flex justify-center items-center rounded-sm  hover:text-white hover:bg-blue-600 focus:border-0  focus:border-transparent focus:outline-none"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg></button>
-                <button class="ml-2 text-gray-500 bg-gray-100 w-7 h-7 flex justify-center items-center rounded-sm hover:text-white hover:bg-blue-600 focus:border-0 focus:outline-none"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg></button>
+            <div class="col-span-2 flex justify-start pr-4 -ml-14">
+                <button v-on:click="mobile=!mobile, desktop=!desktop" :class="{Selected:desktop}" class=" bg-gray-100 w-7 h-7 flex justify-center items-center rounded-sm  hover:text-white hover:bg-blue-600 focus:border-0  focus:border-transparent focus:outline-none"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg></button>
+                <button v-on:click="mobile=!mobile, desktop=!desktop" :class="{Selected:mobile}" class="ml-2 text-gray-500 bg-gray-100 w-7 h-7 flex justify-center items-center rounded-sm hover:text-white hover:bg-blue-600 focus:border-0 focus:outline-none"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg></button>
+            </div>
+            <div class=" text-left text-md justify-self-end">
+                <button class="btn-edit-arch h-full">Screenshot <svg class="w-4 h-4 float-left ml-2 self-center" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg></button>
             </div>
 
-            <div class=" col-span-4 border-2 border-gray-300 rounded-md w-full min-h-screen" >
+            <div class=" col-span-4 border-2 border-gray-300 rounded-md w-full min-h-screen flex justify-self-center" :class="{PrevMobile:mobile}" >
                 <!-- <iframe class="w-full h-screen" src="https://codingpotions.com/vue-props" frameborder="0"></iframe> -->
                 <!-- <iframe frameborder="0" width="100%" height="100%" class="" v-bind:src="mail.previewUrl" ></iframe> -->
-                <iframe frameborder="0" width="100%" height="100%" class="" src="http://www.adpdev.com/adp/mx/email-metrics/ver-email.php?c=3465&swapnumber=true&utm_source=adpmx&utm_medium=email&utm_campaign=adpmx_3465&adpmetrics_u=cmxVVXZNWlBlY1Zhaw#" ></iframe>
+                <iframe frameborder="0" width="100%" height="100%" class="" src="http://www.adpdev.com/adp/mx/email-metrics/ver-email.php?c=3545&swapnumber=true&utm_source=adpmx&utm_medium=email&utm_campaign=adpmx_3545&adpmetrics_u=cmxUemJINmR6MEdpdw#" ></iframe>
             </div>
             
             <div class=""></div>
@@ -72,6 +75,9 @@ export default {
     data() {
         return {
             visible: false,
+            mobile: false,
+            desktop: true,
+            tituloCampaña:'',
             agenciaActual:'Seleccionar agencia',
             agencias: {
                 Volvo:{
@@ -153,6 +159,21 @@ export default {
                  this.$store.state.moduleS=true
             }
            
+        },
+        SelectAgenciaA(agencia){
+            this.agenciaActual=agencia.name
+            this.visible=false
+              
+        },
+        CreateCamp(){
+            console.log(this.agenciaActual, this.tituloCampaña)
+            if(this.agenciaActual==''){
+                alert("Completa los campos para crear la campaña")
+            }else{
+                this.$store.state.moduleC=true
+            this.$store.commit('setCreateCamp', this.agenciaActual )
+            }
+            
         }
       
     },
@@ -172,3 +193,15 @@ export default {
 
 }
 </script>
+<style>
+    .PrevMobile{
+        width: 58.333333%;
+       
+    }
+    .Selected{
+        --tw-bg-opacity: 1;
+        background-color: rgba(37, 99, 235, var(--tw-bg-opacity)); 
+        --tw-text-opacity: 1;
+        color: rgba(255, 255, 255, var(--tw-text-opacity));
+    }
+</style>
