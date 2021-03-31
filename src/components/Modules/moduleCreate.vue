@@ -6,7 +6,7 @@
                     <p class="text-xs text-left">{{$store.state.agenciaActual}}</p>
                 </div>
                 <div>
-                    <h3 class="relative text-lg font-bold text-left">Se creará la campaña "{{$store.state.nameMail}}"</h3>
+                    <h3 class="relative text-lg font-bold text-left">Se creará la campaña "{{$store.state.nameCamp}}"</h3>
                 </div>
                     
                 <div>

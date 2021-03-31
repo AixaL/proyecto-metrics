@@ -18,11 +18,11 @@
             <div class="col-span-4">
                 <p class="text-left text-sm mb-2">Titulo de la Campaña</p>
                 <form class="relative ">
-                <input class="focus:border-light-blue-500 focus:ring-1 focus:ring-light-blue-500 focus:outline-none w-full text-sm text-black placeholder-gray-600 border border-gray-200 rounded-md py-2 pl-4 h-10" type="text" aria-label="Título" placeholder="Título"  />
+                <input v-model="tituloCamp" class="focus:border-light-blue-500 focus:ring-1 focus:ring-light-blue-500 focus:outline-none w-full text-sm text-black placeholder-gray-600 border border-gray-200 rounded-md py-2 pl-4 h-10" type="text" aria-label="Título" placeholder="Título"  />
             </form>
             </div>
             <div class="col-span-2">
-                <button v-on:click="visible=true, getAgencias, agenciaActual='Seleccionar agencia'" type="button" class="flex text-left  w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:border-light-blue-500 focus:ring-1 focus:ring-light-blue-500 focus:outline-none " id="options-menu" aria-expanded="true" aria-haspopup="true">
+                <button v-on:click="getAgen()" type="button" class="flex text-left  w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:border-light-blue-500 focus:ring-1 focus:ring-light-blue-500 focus:outline-none " id="options-menu" aria-expanded="true" aria-haspopup="true">
             
                     
               <div class=" flex justify-start w-10/12 "><p class="justify-start text-gray-700">{{agenciaActual}}</p></div>
@@ -37,10 +37,10 @@
             <div class="col-span-2 flex h-10">
                 <button v-on:click="CreateCamp" class="buttonCreate">Crear Campaña</button>
             </div>
-            <div v-if="visible" v-on:mouseleave="visible=false" class=" col-span-2 -mt-4">
+            <div v-if="visible" v-on:mouseleave="visible=false" class=" col-span-2 -mt-4 overflow-y-auto h-40">
                      <div class="bg-white z-10 w-full shadow-md text-left">
-                        <ul v-for="agencia in getAgencias" v-bind:key="agencia.id">
-                            <li v-on:click="SelectAgenciaA(agencia)" class="p-2 cursor-pointer font-semibold hover:bg-gray-100 hover:text-blue-600 border-b-2 border-gray-100">{{agencia.name}}</li>
+                        <ul v-for="agencia in agen" v-bind:key="agencia.id">
+                            <li v-on:click="SelectAgenciaA(agencia)" class="p-2 cursor-pointer font-semibold hover:bg-gray-100 hover:text-blue-600 border-b-2 border-gray-100">{{agencia.cliente}}</li>
                         </ul>
                     </div>
             </div>
@@ -71,14 +71,16 @@
 
 <script>
 import {mapState} from 'vuex'
+import axios from 'axios'
 export default {
     data() {
         return {
             visible: false,
             mobile: false,
             desktop: true,
-            tituloCampaña:'',
+            tituloCamp:'',
             agenciaActual:'Seleccionar agencia',
+            agen:'',
             agencias: {
                 Volvo:{
                     name:'Volvo',
@@ -161,20 +163,39 @@ export default {
            
         },
         SelectAgenciaA(agencia){
-            this.agenciaActual=agencia.name
+            this.agenciaActual=agencia.cliente
             this.visible=false
               
         },
         CreateCamp(){
-            console.log(this.agenciaActual, this.tituloCampaña)
-            if(this.agenciaActual==''){
+            console.log(this.agenciaActual, this.tituloCamp)
+            if(this.agenciaActual==''|| this.tituloCamp==''){
                 alert("Completa los campos para crear la campaña")
             }else{
                 this.$store.state.moduleC=true
-            this.$store.commit('setCreateCamp', this.agenciaActual )
+            this.$store.commit('setCreateCamp', { agencia :this.agenciaActual, titulo: this.tituloCamp } )
             }
             
-        }
+        },
+        getAgen(){
+            this.visible=true
+            this.agenciaActual='Seleccionar agencia'
+            axios.post("http://localhost:8080/cs/api/mailing/getAgencias",{
+                    marca: this.$store.state.agenciaName
+            }).then(response => {
+                let agencias= response.data
+
+                this.agen = agencias.response
+                this.agen = this.agen.response
+                console.log(this.agen.response)
+                return this.agen
+              
+            }).catch(e => {
+                console.log(e);
+            })
+
+            return this.agen
+        },
       
     },
     computed: {
@@ -184,9 +205,10 @@ export default {
          getAgencias(){
             let agenName= this.$store.state.agenciaName;
             let agencias=this.agencias[agenName].agencia
-            console.log(agenName)
+            // console.log(agenName)
             return(agencias)
-        }
+        },
+        
 
     } 
    

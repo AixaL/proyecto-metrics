@@ -7,7 +7,7 @@
                 <button v-on:click="visible=true" class="btn-mailings"><svg class="w-4 h-4 self-center place-self-center justify-self-center" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"></path></svg></button>
             </div>
             <div class="w-full mt-1 text-gray-500 text-sm z-0 ">
-                <p class="w-10/12 float-left">{{time.split("T",1).join('')}}</p>
+                <p class="w-10/12 float-left">{{newTime}}</p>
                 <p class="w-2/12 float-left text-xs text-gray-400 text-right">#{{id}}</p>
             </div>
             <div v-if="visible" v-on:mouseleave="visible=false" class="menu-mailings" style="margin-left:75%" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
@@ -48,7 +48,7 @@ export default {
     },
     // } ['time','name'],
     computed:{
-        
+
     },
     methods: {
        Vermailing(mail){
@@ -56,6 +56,16 @@ export default {
            this.$store.commit('setMail', mail)
        }
     },
+    setup(props) {
+        // console.log(props)
+        let newTime= props.time.split("T",1).join('')
+
+        var fecha = new Date(newTime);
+        var options = { year: 'numeric', month: 'long', day: 'numeric' };
+
+        newTime = fecha.toLocaleDateString("es-ES", options)
+        return({newTime})
+    }
     // data: {
     
     // }

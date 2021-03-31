@@ -6,6 +6,8 @@ export default createStore({
     mailings:[],
     moduleS: false,
     moduleC:false,
+    nameCamp:'',
+    results:0,
     mail:'',
     nameMail:'',
     search: '',
@@ -16,6 +18,7 @@ export default createStore({
   mutations: {
     setMailings(state, payload){
       state.mailings= payload
+      state.results= payload.length
     },
     setStripoKey(state, key){
       state.StripoKey = key
@@ -26,22 +29,26 @@ export default createStore({
     setMail(state, mailS){
       state.mail = mailS
     },
-    setCreateCamp(state, agenciaA, mailName){
-      console.log(agenciaA, mailName)
-      state.agenciaActual=agenciaA
+    setCreateCamp(state, datos){
+      // console.log(datos.agencia, datos.titulo)
+      state.agenciaActual=datos.agencia
       state.nameMail=state.mail.name
+      state.nameCamp=datos.titulo
     }
   },
   actions: {
 
    async getMailings({commit}){
+    let formData = new FormData();
+
+    formData.append('cmd', 'get_emails');
+    formData.append('stripojwt',  this.state.StripoKey);
      
      try {
-         await axios.get('http://localhost:8080/emailgeneration/v1/emails', { headers:{'Stripo-Api-Auth': this.state.StripoKey}  
-         }
-         
+         await axios.post('http://localhost:8080/adp/metrics/gateway.php',
+          formData
         )
-        .then(response => response.data)
+        .then(response => response.data.response.data)
         .then(items => {
           console.log(items); 
           commit('setMailings', items)
@@ -51,10 +58,6 @@ export default createStore({
      }
     
     },
-
-    getStripoKey({commit}, key){
-        commit('setStripoKey', key)
-    }
   },
   getters:{
     filterAZ: state =>{

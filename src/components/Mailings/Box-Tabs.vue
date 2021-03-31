@@ -10,7 +10,7 @@
                 <div class="grid grid-cols-4 bg-gray-100 text-xs p-2">
                     <div v-on:click="visible=true" class="cursor-pointer col-span-2  text-gray-600 text-left self-center font-semibold justify-center "><p class="float-left mr-2 self-center">{{orden}}</p><svg class="flex w-4 h-4 self-center" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></div>
                     <div></div>
-                    <div class="text-gray-500 text-right text-xs self-center">Resultados: {{}}</div>
+                    <div class="text-gray-500 text-right text-xs self-center">Resultados: {{$store.state.results}}</div>
                     <!-- mailings.data.length -->
                 </div>
                 <div v-if="visible" v-on:mouseleave="visible=false" class="absolute bg-gray-100 z-10 rounded-sm shadow-md">
@@ -25,8 +25,8 @@
             
             <div >
                  <MailingsBox
-                    v-for="mail of mailings.data" :key="mail.emailId" :name="mail.name" :time="mail.updatedTime"
-                    :id="mail.emailId" :editStripo="mail.editorUrl" :mailS="mail"
+                    v-for="mail of mailings" :key="mail.emailId" :name="mail.name" :time="mail.updatedTime"
+                    :id="mail.emailId" :editStripo="mail.editorUrl" :mailS="mail" 
                  /> 
             </div>
         </div>
@@ -34,7 +34,7 @@
 </template>
 <script>
 import { useStore} from 'vuex'
-import {computed, onMounted} from 'vue'
+import {computed} from 'vue'
 import MailingsBox from '@/components/Mailings/mailings.vue'
 export default {
     name: 'App',
@@ -45,7 +45,7 @@ export default {
         return {
             visible: false,
             orden: 'Ordenar por',
-            idOrden: 0
+            idOrden: 0,
         }
     },
     methods: {
@@ -56,15 +56,18 @@ export default {
 
         }
     },
+    computed:{
+    
+    },
     setup() {
         const store = useStore()
-        onMounted(() => {
-            store.dispatch('getMailings')
-        
-        })
+        store.dispatch('getMailings')
         const mailings = computed(() => store.state.mailings)
+        console.log(mailings.value)
 
-        return {mailings}
-    },
+        return {mailings, }
+        
+        
+    }
 }
 </script>
