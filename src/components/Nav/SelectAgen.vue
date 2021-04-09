@@ -85,6 +85,7 @@
                 this.$store.commit('setStripoKey', agen.key)
                 this.$store.commit('setAgenciaName', agen.name)
                 this.$store.dispatch('getMailings')
+                this.$store.dispatch('getAgen')
                 // console.log(agen.key)
                 // ...Vuex.mapMutations([])
             },

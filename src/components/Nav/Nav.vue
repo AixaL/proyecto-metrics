@@ -37,7 +37,28 @@
     }),
     methods: {
       searchBar(){
-       console.log(this.search)
+       this.$store.state.search=this.search
+       var search= this.search.trim().toLowerCase()
+  
+       var maili=this.$store.state.mailings
+
+       if(this.$store.state.search !== ''){
+          maili = maili.filter(function(item){
+          if(item.name.toLowerCase().indexOf(search) !== -1){
+            return item;
+          }
+        })
+        console.log(maili.length)
+         this.$store.state.mailings=maili
+         if(this.$store.state.mailings==0){
+          this.$store.state.NoResults=true;
+        }else{
+          this.$store.state.NoResults=false;
+        }
+       }else if(search ===''){
+          this.$store.dispatch('getMailings')
+       }
+      
       }
     },
   }

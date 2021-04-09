@@ -8,22 +8,25 @@
         <div class="bg-white w-full min-h-screen ">
             <div class="p-3">
                 <div class="grid grid-cols-4 bg-gray-100 text-xs p-2">
-                    <div v-on:click="visible=true" class="cursor-pointer col-span-2  text-gray-600 text-left self-center font-semibold justify-center "><p class="float-left mr-2 self-center">{{orden}}</p><svg class="flex w-4 h-4 self-center" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></div>
-                    <div></div>
+                    <div v-on:click="visible=true" class="cursor-pointer col-span-3  text-gray-600 text-left self-center font-semibold justify-center "><p class="float-left mr-2 self-center">{{orden}}</p><svg class="flex w-4 h-4 self-center" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></div>
+                    <!-- <div></div> -->
                     <div class="text-gray-500 text-right text-xs self-center">Resultados: {{$store.state.results}}</div>
                     <!-- mailings.data.length -->
                 </div>
                 <div v-if="visible" v-on:mouseleave="visible=false" class="absolute bg-gray-100 z-10 rounded-sm shadow-md">
                 <ul class="text-left">
-                    <li v-on:click="Ordenar('Fecha (Más reciente)', 1)" class="order-menu">Fecha (Mas reciente)</li>
-                    <li v-on:click="Ordenar('Fecha (Menos reciente)', 2)" class="order-menu">Fecha (Menos reciente)</li>
-                    <li v-on:click="orden='A a Z'; visible=false" class="order-menu">A a Z</li>
-                    <li v-on:click="orden='Z a A'; visible=false" class="order-menu">Z a A</li>
+                    <li v-on:click="Ordenar('Fecha (Más reciente)', 2)" class="order-menu">Fecha (Mas reciente)</li>
+                    <li v-on:click="Ordenar('Fecha (Menos reciente)', 1)" class="order-menu">Fecha (Menos reciente)</li>
+                    <li class="order-menu" v-on:click="Ordenar('A a Z', 3)">A a Z</li>
+                    <li v-on:click="Ordenar('Z a A' ,4)" class="order-menu">Z a A</li>
                 </ul>
             </div>
             </div>
             
             <div >
+                <div v-if="$store.state.NoResults">
+                    <h2>No hay resultados</h2>
+                </div>
                  <MailingsBox
                     v-for="mail of mailings" :key="mail.emailId" :name="mail.name" :time="mail.updatedTime"
                     :id="mail.emailId" :editStripo="mail.editorUrl" :mailS="mail" 
@@ -53,20 +56,76 @@ export default {
             this.orden=texto; 
             this.visible=false;
             this.idOrden=id
+            // this.$store.dispatch('getMailings')
+             var data= this.$store.state.mailings
+            switch (id){
+                case 1:
+                    data.sort(function(a,b){
+                        if(a.updatedTime < b.updatedTime)
+                        return -1;
+                        if(a.updatedTime > b.updatedTime)
+                        return 1;
+                        return 0;
+                    })
+                    this.$store.state.mailings=data
+                    break;
+                case 2:
+                    data.sort(function(a,b){
+                        if(a.updatedTime < b.updatedTime)
+                        return -1;
+                        if(a.updatedTime > b.updatedTime)
+                        return 1;
+                        return 0;
+                    })
+                    this.$store.state.mailings=data.reverse()
+                    break;
+                    
+                case 3:
+                      data.sort(function(a,b){
+                        if(a.name.toLowerCase() < b.name.toLowerCase())
+                        return -1;
+                        if(a.name.toLowerCase() > b.name.toLowerCase())
+                        return 1;
+                        return 0;
+                    })
+                    this.$store.state.mailings=data
+                    break;
+                case 4:
+                     data.sort(function(a,b){
+                        if(a.name.toLowerCase() < b.name.toLowerCase())
+                        return -1;
+                        if(a.name.toLowerCase() > b.name.toLowerCase())
+                        return 1;
+                        return 0;
+                    })
+                   this.$store.state.mailings=data.reverse()
+                    break;
+            }
+               
 
         }
-    },
-    computed:{
-    
     },
     setup() {
         const store = useStore()
         store.dispatch('getMailings')
-        const mailings = computed(() => store.state.mailings)
-        console.log(mailings.value)
-
-        return {mailings, }
         
+        const mailings = computed(() => store.state.mailings)
+        // var data=mailings.value
+        console.log(store.state.search)
+      
+        // data.sort(function(a,b){
+        //     if(a.updatedTime < b.updatedTime)
+        //     return -1;
+        //     if(a.updatedTime > b.updatedTime)
+        //     return 1;
+        //     return 0;
+        // })
+
+    
+        // console.log(data.reverse())
+
+      
+        return {mailings}
         
     }
 }

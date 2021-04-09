@@ -11,13 +11,14 @@
                     
                 <div>
                     <p class="text-sm text-left">Por favor escribe el titulo de la campaña para confirmar.</p>
+                    <p v-if="error" class="text-sm text-left text-red-600 pt-1">*El titulo de la campaña no coincide</p>
                 </div>
                 <div >
-                    <input class="text-sm text-left w-full text-black bg-gray-200 h-9 p-2 focus:outline-none" type="text" placeholder="Título de la campaña">
+                    <input v-model="campoTitulo" class="text-sm text-left w-full text-black bg-gray-200 h-9 p-2 focus:outline-none" type="text" placeholder="Título de la campaña">
                 </div>
                 <div class="grid grid-col-2 grid-flow-col gap-4">
                     <div>
-                         <button class="buttonCreate buttonGoStripo" ><a :href="$store.state.mail.editorUrl" target="_blank">Confirmar </a></button>
+                         <button v-on:click="CrearCamp()" class="buttonCreate buttonGoStripo" >Confirmar</button>
                     </div>
                     <div>
                         <button class="buttonCancel" v-on:click="$store.state.moduleC=false">Cancelar</button>
@@ -27,3 +28,23 @@
         </div>
     </div>
 </template>
+
+<script>
+export default {
+    data() {
+        return {
+            campoTitulo:'',
+            error: false,
+        }
+    },
+    methods: {
+        CrearCamp(){
+            if(this.campoTitulo===''|| this.campoTitulo!==this.$store.state.nameCamp){
+                this.error=true
+            }else{
+                this.error=false
+            }
+        }
+    },
+}
+</script>

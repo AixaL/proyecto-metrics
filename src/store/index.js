@@ -10,7 +10,10 @@ export default createStore({
     results:0,
     mail:'',
     nameMail:'',
-    search: '',
+    agenciasMarca:'',
+    linkPrev:'',
+    NoResults: false,
+    search: 'AC',
     agenciaActual:'',
     agenciaName:'Volvo',
     StripoKey:'eyJhbGciOiJIUzI1NiJ9.eyJzZWN1cml0eUNvbnRleHQiOiJ7XCJhcGlLZXlcIjpcIjVkMzJmYWU5LTcyOGUtNGFmNy05MGU2LTM4MWI5OWI1MWE3YVwiLFwicHJvamVjdElkXCI6Mjc4NTcwfSJ9.ICQ9jJGnLRLI85QWCsMC-CzSt7XpN1grWcmaq_Zo6d0'
@@ -19,6 +22,11 @@ export default createStore({
     setMailings(state, payload){
       state.mailings= payload
       state.results= payload.length
+      if(state.results<1){
+        state.NoResults=true
+      }else{
+        state.NoResults=false
+      }
     },
     setStripoKey(state, key){
       state.StripoKey = key
@@ -28,12 +36,16 @@ export default createStore({
     },
     setMail(state, mailS){
       state.mail = mailS
+      state.linkPrev= mailS.previewUrl
     },
     setCreateCamp(state, datos){
       // console.log(datos.agencia, datos.titulo)
       state.agenciaActual=datos.agencia
       state.nameMail=state.mail.name
       state.nameCamp=datos.titulo
+    },
+    setAgencias(state, data){
+      state.agenciasMarca=data
     }
   },
   actions: {
@@ -58,23 +70,21 @@ export default createStore({
      }
     
     },
-  },
-  getters:{
-    filterAZ: state =>{
-      return state.mailings.filter(mailings => mailings.updatedTime)
-    },
-    // filterZA: state =>{
 
-    // },
-    // filterDateR: state =>{
-
-    // },
-    // filterDateL: state => {
-
-    // },
-    // searchBar: state => {
-
-    // }
+    async getAgen({commit}){
+      try {
+        axios.post("http://localhost:8080/cs/api/mailing/getAgencias",{
+          marca: this.state.agenciaName
+        }).then(response => response.data.response.response)
+        .then(items =>{
+          console.log(items)
+          commit('setAgencias', items)
+        })
+         
+      } catch (error) {
+        console.log(error)
+      }
+    }
   },
   modules: {
   }

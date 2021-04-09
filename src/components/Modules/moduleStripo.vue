@@ -10,7 +10,7 @@
                 </div>
                 <div class="grid grid-col-2 grid-flow-col gap-4">
                     <div>
-                         <button class="buttonCreate buttonGoStripo" ><a :href="$store.state.mail.editorUrl" target="_blank">ir a Stripo </a></button>
+                         <button class="buttonCreate buttonGoStripo" ><a :href="$store.state.linkPrev" target="_blank">ir a Stripo </a></button>
                     </div>
                     <div>
                         <button class="buttonCancel" v-on:click="$store.state.moduleS=false">Cancelar</button>
