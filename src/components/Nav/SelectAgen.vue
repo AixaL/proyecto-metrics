@@ -86,6 +86,9 @@
                 this.$store.commit('setAgenciaName', agen.name)
                 this.$store.dispatch('getMailings')
                 this.$store.dispatch('getAgen')
+                this.$store.state.mail=''
+                this.$store.state.linkPrev=''
+
                 // console.log(agen.key)
                 // ...Vuex.mapMutations([])
             },

@@ -5,6 +5,8 @@ import store from './store'
 import './assets/css/tailwind.css'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import VueHtml2Canvas from 'vue-html2canvas'
+// import webshot from 'webshot';
+// .use(webshot)
 
-
-createApp(App).use(store).use(VueAxios, axios).use(router).mount('#app')
+createApp(App).use(store).use(VueHtml2Canvas).use(VueAxios, axios).use(router).mount('#app')

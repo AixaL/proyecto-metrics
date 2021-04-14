@@ -12,6 +12,7 @@ export default createStore({
     nameMail:'',
     agenciasMarca:'',
     linkPrev:'',
+    imageScreen:'',
     NoResults: false,
     search: 'AC',
     agenciaActual:'',
@@ -36,7 +37,7 @@ export default createStore({
     },
     setMail(state, mailS){
       state.mail = mailS
-      state.linkPrev= mailS.previewUrl
+     
     },
     setCreateCamp(state, datos){
       // console.log(datos.agencia, datos.titulo)
@@ -46,6 +47,10 @@ export default createStore({
     },
     setAgencias(state, data){
       state.agenciasMarca=data
+    },
+    setScreenshot(state, data){
+      console.log(data.data.url)
+      state.imageScreen=data.data.url
     }
   },
   actions: {
@@ -84,6 +89,23 @@ export default createStore({
       } catch (error) {
         console.log(error)
       }
+    },
+    async getScreenshot({commit}){
+      console.log(this.state.linkPrev)
+      let link ='https://api.apiflash.com/v1/urltoimage?access_key=98f86209b17d4575995a79dd19889cec&url='+this.state.linkPrev+'&response_type=json&full_page=true'
+      console.log(link)
+      axios.get(link)
+      // axios.get(`http://api.screenshotlayer.com/api/capture?access_key=1c78bc418a5144015bf68bc5c01121e7&url=https://www.google.com/sky/`)
+      .then(function(response){
+        // console.log(JSON.stringify(response));
+        // console.log(response)
+        
+        // var a = document.createElement("a"); //Create <a>
+        // a.href = JSON.stringify(response.data)//Image Base64 Goes here
+        // a.download = "Image.png"; //File name Here
+        // a.click();
+        commit('setScreenshot', response)
+      })
     }
   },
   modules: {

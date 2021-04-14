@@ -1,5 +1,5 @@
 <template>
-    <div class="grid grid-cols-4  bg-white p-3 gap-3">
+    <div ref="previo" class="grid grid-cols-4  bg-white p-3 gap-3">
             <div class="col-span-2 ">
                 <p class="text-left text-lg font-bold text-black">{{mail.name}}</p>
             </div>
@@ -27,7 +27,7 @@
             </form>
             </div>
             <div class="col-span-2" >
-                <select class="flex text-left  w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:border-light-blue-500 focus:ring-1 focus:ring-light-blue-500 focus:outline-none " v-model="agenciaActual" name="Seleccionar agencia" placeholder="Seleccionar agencia" id="agencia" v-bind="$attrs">
+                <select class="flex text-left cursor-pointer  w-full rounded-md border border-gray-300 shadow-sm px-2 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:border-light-blue-500 focus:ring-1 focus:ring-light-blue-500 focus:outline-none " v-model="agenciaActual" name="Seleccionar agencia" placeholder="Seleccionar agencia" id="agencia" v-bind="$attrs">
                 <option >Seleccionar agencia</option>
                 <option class="p-2 cursor-pointer font-semibold h-40 hover:bg-gray-100 hover:text-blue-600 border-b-2 border-gray-100" v-for="agencia in agencias_Array" :value="agencia" :key="agencia.id">{{agencia.cliente}}</option>
                 </select>
@@ -51,8 +51,11 @@
                 </button>
             </div>
              -->
-            <div class="col-span-2 flex h-10">
-                <button v-on:click="CreateCamp" class="buttonCreate">Crear Campaña</button>
+            <div v-if="!disableCrear" class="col-span-2 flex h-10">
+                <button :disabled="disableCrear" v-on:click="CreateCamp" class="buttonCreate ">Crear Campaña</button>
+            </div>
+            <div v-if="disableCrear" class="col-span-2 flex h-10">
+                <button :disabled="disableCrear" class="buttonCreate bg-gray-400 hover:bg-gray-400">Crear Campaña</button>
             </div>
             <!-- <div v-if="visible" v-on:mouseleave="visible=false" class=" col-span-2 -mt-4 overflow-y-auto h-40">
                      <div class="bg-white z-10 w-full shadow-md text-left">
@@ -64,26 +67,41 @@
             <div class="hidden col-span-2"></div>
             <div class="col-span-4 border-gray-100 border-b-2"></div>
 
-            <div class="text-left text-md w-4/6 flex items-center">
-                <button v-on:click="newLink">
-                    <p class="font-semibold">Vista previa</p>
+            <div class="text-left text-md w-5/6 flex items-center h-7">
+                <button v-on:click="newLink" class="btn-edit-arch h-full">
+                    <p class="">Links</p>
                 </button>
                 
             </div>
-            <div class="col-span-2 flex justify-start pr-4 -ml-14">
-                <button v-on:click="mobile=!mobile, desktop=!desktop" :class="{Selected:desktop}" class=" bg-gray-100 w-7 h-7 flex justify-center items-center rounded-sm  hover:text-white hover:bg-blue-600 focus:border-0  focus:border-transparent focus:outline-none"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg></button>
-                <button v-on:click="mobile=!mobile, desktop=!desktop" :class="{Selected:mobile}" class="ml-2 text-gray-500 bg-gray-100 w-7 h-7 flex justify-center items-center rounded-sm hover:text-white hover:bg-blue-600 focus:border-0 focus:outline-none"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg></button>
+
+            <div class="text-left text-md w-5/6 flex items-center h-7">
+                <button v-on:click="newLink" class="btn-edit-arch h-full">
+                    <p class="font-semibold">Vista previa</p>
+                    <svg v-if="$store.state.linkPrev!=''" class="w-4 h-4 float-left ml-2 self-center" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                </button>
+                
             </div>
+            
+           
+           
             <div class=" text-left text-md justify-self-end">
-                <a :href="mail.previewUrl" target="_blank"><button class="btn-edit-arch h-full">Ver mail <svg class="w-4 h-4 float-left ml-2 self-center"  fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></button></a>
+                <button  v-on:click="print()" class="btn-edit-arch h-full">Screenshot <svg class="w-4 h-4 float-left ml-2 self-center" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg></button>
             </div>
-            <!-- <div class=" text-left text-md justify-self-end">
-                <button class="btn-edit-arch h-full">Screenshot <svg class="w-4 h-4 float-left ml-2 self-center" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg></button>
-            </div> -->
+             <div class=" text-left text-md justify-self-end">
+                <a :href="$store.state.linkPrev" target="_blank"><button class="btn-edit-arch h-full">Ver mail <svg class="w-4 h-4 float-left ml-2 self-center"  fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></button></a>
+            </div>
+            <div class="col-span-4 w-full pl-4 "></div>
+            <div class="col-span-4 w-full pl-4 flex justify-end">
+                 <div class=" flex justify-start pr-4 -ml-4">
+                    <button  :disabled="disable" v-on:click="mobile=!mobile, desktop=!desktop" :class="{Selected:desktop}" class=" bg-gray-100 w-7 h-7 flex justify-center items-center rounded-sm  hover:text-white hover:bg-blue-600 focus:border-0  focus:border-transparent focus:outline-none"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg></button>
+                    <button v-on:click="mobile=!mobile, desktop=!desktop" :class="{Selected:mobile}" class="ml-2 text-gray-500 bg-gray-100 w-7 h-7 flex justify-center items-center rounded-sm hover:text-white hover:bg-blue-600 focus:border-0 focus:outline-none"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg></button>
+                </div>
+            </div>
 
             <div class=" col-span-4 border-2 border-gray-300 rounded-md w-full min-h-screen flex justify-self-center justify-center" :class="{PrevMobile:mobile}" >
+                
                <!-- <img class="w-80 h-80 flex self-center items-center" src="https://cdn.dribbble.com/users/108183/screenshots/4543219/loader_backinout.gif" alt=""> -->
-                <iframe frameborder="0" width="100%" height="100%" class="" :src="LinkPreview" @onload="cargando=false"  @loaded="cargando=true" :v-show="cargando"></iframe>
+                <iframe id="frame" frameborder="0" width="100%" height="100%" class="" :src="$store.state.linkPrev" @onload="cargando=false"  @loaded="cargando=true" crossorigin="anonymous" ></iframe>
             </div>
             
             <div class=""></div>
@@ -94,6 +112,10 @@
 <script>
 import {mapState,useStore} from 'vuex'
 import {computed} from 'vue'
+// import webshot from 'webshot'
+// Object.defineProperty(prototype, '$webshot', { value: webshot });
+// import html2canvas from 'html2canvas'
+// import VueHtml2Canvas from 'vue-html2canvas'
 // import vSelect from 'vue-select'
 // import { useStore} from 'vuex'
 // import axios from 'axios'
@@ -103,8 +125,12 @@ export default {
             visible: false,
             mobile: false,
             desktop: true,
+            disable: true,
+            refresh: false,
+            disableCrear: true,
             tituloCamp:'',
             LinkPreview:'',
+            info:'',
             cargando:false,
             agenciaActual:'Seleccionar agencia',
             agen:'',
@@ -181,6 +207,7 @@ export default {
         }
     },
     components: {
+        // ref,
         //  vSelect,
      },
     methods: {
@@ -211,15 +238,52 @@ export default {
             
         },
         newLink(){
-            let number =Math.floor(Math.random() * 101) + 1;
-            var link = 'https://www.adpdev.com/adp/metrics/includes/PreviewMailStripo.php?IdCliente=85&NombreCampana='+ this.tituloCamp + '&emailid='+ this.$store.state.mail.emailId+ '&stripojwt='+this.$store.state.StripoKey+'&random='+number
-            // console.log(link)
-            this.LinkPreview= link
-            this.cargando=false
+            if(this.$store.state.mail==''){
+                alert('Selecciona un mail')
+            }else{
+                var idCliente =''
+                if(this.tituloCamp==''){
+                    this.tituloCamp= this.mail.name
+                }
+                console.log(this.agenciaActual.id)
+                if(this.agenciaActual == 'Seleccionar agencia' || this.agenciaActual.id=='undefined'){
+                    idCliente=85
+                }else{
+                    idCliente=this.agenciaActual.id
+                }
+                let number =Math.floor(Math.random() * 101) + 1;
+                var link = 'https://www.adpdev.com/adp/metrics/includes/PreviewMailStripo.php?IdCliente='+idCliente+'&NombreCampana='+ this.tituloCamp + '&emailid='+ this.$store.state.mail.emailId+ '&stripojwt='+this.$store.state.StripoKey+'&random='+number
+                // console.log(link)
+                // this.LinkPreview= link
+                this.cargando=false
+                this.disable=false
+                this.refresh=true
+                this.$store.state.linkPrev=link
+            }
+           
             // return link
     
         },
+         print() {
+            //  const res= fetch('http://localhost:3000/')
+            //  console.log(res)
+        // axios.get('http://localhost:3000/').then(function(response){
+        //     console.log(response)
+        // })
+          this.$store.dispatch('getScreenshot')
+
+        var a = document.createElement("a"); //Create <a>
+        a.href = this.$store.state.imageScreen
+        a.target='_blank' //Image Base64 Goes here
+        // a.download = "Image.png"; //File name Here
+        a.click();
+
+        //   console.log(this.info)
+        }
     },
+//     mounted() {
+//     this.print()
+//   },
     computed: {
         ...mapState({
             mail: 'mail'
