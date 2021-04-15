@@ -68,22 +68,15 @@
             <div class="col-span-4 border-gray-100 border-b-2"></div>
             <div class="col-span-4">
                 <div class="grid grid-cols-4">
-                    <div class="text-center text-md flex items-center h-7 justify-center border-b-2 border-blue-700">
-                        <button v-on:click="preview=true; links=false; images=false" class=" focus:border-none h-full focus:outline-none">
-                            <p class="font-semibold ">Vista previa</p>
-                        </button>
+                    <div v-on:click="preview=true; links=false; images=false" class=" cursor-pointer text-center text-md flex items-center h-7 justify-center" :class="{tabSelected:preview}">
+                            <p class="">Vista previa</p>
                     </div>
-                    <div class="text-center text-md flex items-center h-7 justify-center">
-                        <button v-on:click="preview=false; links=true; images=false" class=" h-full focus:outline-none">
-                            <p class="">Verificación de Links</p>
-                        </button>
-                        
+                    <div v-on:click="preview=false; links=true; images=false"  class="cursor-pointer text-center text-md flex items-center h-7 justify-center" :class="{tabSelected:links}">
+                            <p class="">Verificación de Links</p>    
                     </div>
-                    <div class="text-center text-md flex items-center h-7 justify-center w-60">
-                        <button  v-on:click="preview=false; links=false; images=true" class=" h-full focus:outline-none">
+                    <div v-on:click="preview=false; links=false; images=true" class=" cursor-pointer  text-center text-md flex items-center h-7 justify-center w-60" :class="{tabSelected:images}">
                             <p class="">Verificación de Imagenes</p>
-                        </button>
-                        
+                       
                     </div>
                 </div>
                
@@ -269,4 +262,16 @@ export default {
         --tw-text-opacity: 1;
         color: rgba(255, 255, 255, var(--tw-text-opacity));
     }
+    .tabSelected{
+        --tw-border-opacity: 1;
+    border-color: rgba(29, 78, 216, var(--tw-border-opacity));
+        border-bottom-width: 2px;
+        font-weight: 600;
+          --tw-text-opacity: 1;
+    color: rgba(37, 99, 235, var(--tw-text-opacity));
+    }
+    /* .tabSelected>p{
+         font-weight: 600;
+    } */
+
 </style>
