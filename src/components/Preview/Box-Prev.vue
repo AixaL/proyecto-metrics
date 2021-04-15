@@ -27,7 +27,7 @@
             </form>
             </div>
             <div class="col-span-2" >
-                <select class="flex text-left cursor-pointer  w-full rounded-md border border-gray-300 shadow-sm px-2 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:border-light-blue-500 focus:ring-1 focus:ring-light-blue-500 focus:outline-none " v-model="agenciaActual" name="Seleccionar agencia" placeholder="Seleccionar agencia" id="agencia" v-bind="$attrs">
+                <select class="flex text-left cursor-pointer  w-full rounded-md border border-gray-200 shadow-sm px-2 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:border-light-blue-500 focus:ring-1 focus:ring-light-blue-500 focus:outline-none " v-model="agenciaActual" name="Seleccionar agencia" placeholder="Seleccionar agencia" id="agencia" v-bind="$attrs">
                 <option >Seleccionar agencia</option>
                 <option class="p-2 cursor-pointer font-semibold h-40 hover:bg-gray-100 hover:text-blue-600 border-b-2 border-gray-100" v-for="agencia in agencias_Array" :value="agencia" :key="agencia.id">{{agencia.cliente}}</option>
                 </select>
@@ -40,7 +40,7 @@
                  </v-select>
             </div> -->
             <!-- <div class="col-span-2">
-                <button v-on:click="getAgen()" type="button" class="flex text-left  w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:border-light-blue-500 focus:ring-1 focus:ring-light-blue-500 focus:outline-none " id="options-menu" aria-expanded="true" aria-haspopup="true">          
+                <button v-on:click="getAgen()" type="button" class="flex text-left  w-full rounded-md border border-gray-200 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:border-light-blue-500 focus:ring-1 focus:ring-light-blue-500 focus:outline-none " id="options-menu" aria-expanded="true" aria-haspopup="true">          
               <div class=" flex justify-start w-10/12 "><p class="justify-start text-gray-700">{{agenciaActual}}</p>
               </div>
               <div class=" flex justify-end w-2-12">
@@ -66,52 +66,70 @@
             </div> -->
             <div class="hidden col-span-2"></div>
             <div class="col-span-4 border-gray-100 border-b-2"></div>
-
-            <div class="text-left text-md w-5/6 flex items-center h-7">
-                <button v-on:click="newLink" class="btn-edit-arch h-full">
-                    <p class="">Links</p>
-                </button>
-                
+            <div class="col-span-4">
+                <div class="grid grid-cols-4">
+                    <div class="text-center text-md flex items-center h-7 justify-center border-b-2 border-blue-700">
+                        <button v-on:click="preview=true; links=false; images=false" class=" focus:border-none h-full focus:outline-none">
+                            <p class="font-semibold ">Vista previa</p>
+                        </button>
+                    </div>
+                    <div class="text-center text-md flex items-center h-7 justify-center">
+                        <button v-on:click="preview=false; links=true; images=false" class=" h-full focus:outline-none">
+                            <p class="">Verificación de Links</p>
+                        </button>
+                        
+                    </div>
+                    <div class="text-center text-md flex items-center h-7 justify-center w-60">
+                        <button  v-on:click="preview=false; links=false; images=true" class=" h-full focus:outline-none">
+                            <p class="">Verificación de Imagenes</p>
+                        </button>
+                        
+                    </div>
+                </div>
+               
             </div>
 
-            <div class="text-left text-md w-5/6 flex items-center h-7">
-                <button v-on:click="newLink" class="btn-edit-arch h-full">
-                    <p class="font-semibold">Vista previa</p>
-                    <svg v-if="$store.state.linkPrev!=''" class="w-4 h-4 float-left ml-2 self-center" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
-                </button>
+            <div class="col-span-4 w-full mt-4" v-if="preview">
+                <div class="grid grid-cols-4 h-7  flex justify-center">
+                    <div class=" flex justify-center">
+                        <button  v-on:click="mobile=!mobile, desktop=!desktop" :class="{Selected:desktop}" class=" bg-gray-100 w-7 h-7 flex justify-center items-center rounded-sm  hover:text-white hover:bg-blue-600 focus:border-0  focus:border-transparent focus:outline-none"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg></button>
+                        <button v-on:click="mobile=!mobile, desktop=!desktop" :class="{Selected:mobile}" class="ml-2 text-gray-500 bg-gray-100 w-7 h-7 flex justify-center items-center rounded-sm hover:text-white hover:bg-blue-600 focus:border-0 focus:outline-none"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg></button>
+                    </div>
+                    <div>
+                         <button  v-on:click="newLink" class="btn-edit-arch h-full">Refresh 
+                              <svg v-if="$store.state.linkPrev!=''" class="w-4 h-4 float-left ml-2 self-center" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                         </button>
+                       
+                    </div>
+                     <div class=" text-left text-md justify-self-end">
+                        <button  :disabled="disable" v-on:click="print()" class="btn-edit-arch h-full">Screenshot <svg class="w-4 h-4 float-left ml-2 self-center" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg></button>
+                    </div>
+                    <div class=" text-left text-md justify-self-end">
+                        <a  :disabled="disable" :href="$store.state.linkPrev" target="_blank"><button :disabled="disable" class="btn-edit-arch h-full">Ver mail <svg class="w-4 h-4 float-left ml-2 self-center"  fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></button></a>
+                    </div>
+                </div>
+                <div class="col-span-4 mt-6">
+                    <div class="grid grid-cols-4 flex justify-center ">
+                         <div  class="col-span-4 border-2 border-gray-200 rounded-md w-full min-h-screen h-screen  flex justify-self-center" style="height: 800px" :class="{PrevMobile:mobile}" >
                 
-            </div>
-            
-           
-           
-            <div class=" text-left text-md justify-self-end">
-                <button  v-on:click="print()" class="btn-edit-arch h-full">Screenshot <svg class="w-4 h-4 float-left ml-2 self-center" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg></button>
-            </div>
-             <div class=" text-left text-md justify-self-end">
-                <a :href="$store.state.linkPrev" target="_blank"><button class="btn-edit-arch h-full">Ver mail <svg class="w-4 h-4 float-left ml-2 self-center"  fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></button></a>
-            </div>
-            <div class="col-span-4 w-full pl-4 "></div>
-            <div class="col-span-4 w-full pl-4 flex justify-end">
-                 <div class=" flex justify-start pr-4 -ml-4">
-                    <button  :disabled="disable" v-on:click="mobile=!mobile, desktop=!desktop" :class="{Selected:desktop}" class=" bg-gray-100 w-7 h-7 flex justify-center items-center rounded-sm  hover:text-white hover:bg-blue-600 focus:border-0  focus:border-transparent focus:outline-none"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg></button>
-                    <button v-on:click="mobile=!mobile, desktop=!desktop" :class="{Selected:mobile}" class="ml-2 text-gray-500 bg-gray-100 w-7 h-7 flex justify-center items-center rounded-sm hover:text-white hover:bg-blue-600 focus:border-0 focus:outline-none"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg></button>
+                        <!-- <img class="w-80 h-80 flex self-center items-center" src="https://cdn.dribbble.com/users/108183/screenshots/4543219/loader_backinout.gif" alt=""> -->
+                            <iframe id="frame" frameborder="0" width="100%" height="100%" class="" :src="$store.state.linkPrev" @onload="cargando=false"  @loaded="cargando=true" crossorigin="anonymous" ></iframe>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class=" col-span-4 border-2 border-gray-300 rounded-md w-full min-h-screen flex justify-self-center justify-center" :class="{PrevMobile:mobile}" >
-                
-               <!-- <img class="w-80 h-80 flex self-center items-center" src="https://cdn.dribbble.com/users/108183/screenshots/4543219/loader_backinout.gif" alt=""> -->
-                <iframe id="frame" frameborder="0" width="100%" height="100%" class="" :src="$store.state.linkPrev" @onload="cargando=false"  @loaded="cargando=true" crossorigin="anonymous" ></iframe>
-            </div>
-            
-            <div class=""></div>
-        
-    </div>
+            <ImagesVer v-if="images"/>
+            <LinksVer v-if="links"/>
+
+        </div>
 </template>
 
 <script>
 import {mapState,useStore} from 'vuex'
 import {computed} from 'vue'
+import LinksVer from '@/components/Preview/LinksVer.vue'
+import ImagesVer from '@/components/Preview/ImagesVer.vue'
 // import webshot from 'webshot'
 // Object.defineProperty(prototype, '$webshot', { value: webshot });
 // import html2canvas from 'html2canvas'
@@ -128,87 +146,23 @@ export default {
             disable: true,
             refresh: false,
             disableCrear: true,
+            links:false,
+            images: false,
+            preview: true,
             tituloCamp:'',
             LinkPreview:'',
             info:'',
             cargando:false,
             agenciaActual:'Seleccionar agencia',
             agen:'',
-            agencias: {
-                Volvo:{
-                    name:'Volvo',
-                    agencia:[
-                        {
-                            id:0,
-                            name:'Volvo 1'                        
-                        },
-                        {
-                            id:1,
-                            name:'Volvo 2'                        
-                        },
-                        {
-                            id:2,
-                            name:'Volvo 3'                        
-                        },
-                    ]
-                },
-                BMW:{
-                    name:'BMW',
-                    agencia:[
-                        {
-                            id:0,
-                            name:'BMW 1'                        
-                        },
-                        {
-                            id:1,
-                            name:'BMW 2'                        
-                        },
-                        {
-                            id:2,
-                            name:'BMW 3'                        
-                        },
-                    ]
-                },
-                Audi:{
-                    name:'Audi',
-                    agencia:[
-                        {
-                            id:0,
-                            name:'Audi 1'                        
-                        },
-                        {
-                            id:1,
-                            name:'Audi 2'                        
-                        },
-                        {
-                            id:2,
-                            name:'Audi 3'                        
-                        },
-                    ]
-                },
-                Mazda:{
-                    name:'Mazda',
-                    agencia:[
-                        {
-                            id:0,
-                            name:'Mazda 1'                        
-                        },
-                        {
-                            id:1,
-                            name:'Mazda 2'                        
-                        },
-                        {
-                            id:2,
-                            name:'Mazda 3'                        
-                        },
-                    ]
-                }
-            }
         }
     },
     components: {
         // ref,
         //  vSelect,
+        LinksVer,
+        ImagesVer
+
      },
     methods: {
         editS(){
