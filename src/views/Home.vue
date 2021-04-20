@@ -3,11 +3,11 @@
   <ModuleS v-if="$store.state.moduleS"/>
   <ModuleC v-if="$store.state.moduleC"/>
   <Nav/>
-  <div class='grid grid-cols-9 bg-gray-100 p-5'>
-    <div class="pr-2 mt-20 col-span-4">
+  <div class='grid grid-cols-12 bg-gray-100 p-5'>
+    <div class="pr-2 mt-20 col-span-5">
        <BoxTabs />  
     </div>
-    <div class="pl-2 mt-20 col-span-5">
+    <div class="pl-2 mt-20 col-span-7">
       <BoxPrev/>
     </div>
   </div>

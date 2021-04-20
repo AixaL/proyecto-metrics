@@ -58,7 +58,7 @@ export default {
             Vermailing(mail){
            console.log(mail)
            this.$store.commit('setMail', mail)
-           this.$store.state.linkPrev=''
+           this.$store.state.html=''
        }
        
     },

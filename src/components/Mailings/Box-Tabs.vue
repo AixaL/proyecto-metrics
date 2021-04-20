@@ -1,11 +1,11 @@
 <template>
-    <div>
+    <div style="height:800px">
         <div class="grid grid-cols-9">
             <div class="tab tab-select"><svg class="w-5 h-5 float-left mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg> Mailings</div>
             <div class="tab text-gray-400"><svg class="w-5 h-5 float-left mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg> Campañas</div>
             <div class="col-span-4"></div>
         </div>
-        <div class="bg-white w-full min-h-screen ">
+        <div class="bg-white w-full min-h-screen " style="height: 1095px;">
             <div class="p-3">
                
                 <div class="grid grid-cols-5 bg-gray-100 text-xs p-2">
@@ -120,7 +120,7 @@ export default {
         
         const mailings = computed(() => store.state.mailings)
         // var data=mailings.value
-        console.log(store.state.search)
+        // console.log(store.state.search)
       
         // data.sort(function(a,b){
         //     if(a.updatedTime < b.updatedTime)

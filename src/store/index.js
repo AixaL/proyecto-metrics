@@ -10,6 +10,7 @@ export default createStore({
     results:0,
     mail:'',
     nameMail:'',
+    html:'',
     agenciasMarca:'',
     linkPrev:'',
     imageScreen:'',
@@ -51,6 +52,10 @@ export default createStore({
     setScreenshot(state, data){
       console.log(data.data.url)
       state.imageScreen=data.data.url
+    },
+    setHtml(state,data){
+      console.log(data.data.response.html)
+      state.html=data.data.response.html
     }
   },
   actions: {
@@ -99,7 +104,7 @@ export default createStore({
       data.append('response_type','json')
       data.append('full_page','true')
       console.log(link)
-      axios.post(link, data)
+      await axios.post(link, data)
       // axios.get(`http://api.screenshotlayer.com/api/capture?access_key=1c78bc418a5144015bf68bc5c01121e7&url=https://www.google.com/sky/`)
       .then(function(response){
         // console.log(JSON.stringify(response));
@@ -110,6 +115,18 @@ export default createStore({
         // a.download = "Image.png"; //File name Here
         // a.click();
         commit('setScreenshot', response)
+      })
+    },
+    async getHtml({commit},datos){
+      var data = new FormData()
+      data.append('IdCliente', datos.idCliente)
+      data.append('emailid',this.state.mail.emailId)
+      data.append('stripojwt',this.state.StripoKey)
+      let link='https://www.adpdev.com/cs/api/mailing/varsPreviewStripo'
+      await axios.post(link,data).then(function(response){
+        console.log(response)
+  
+        commit('setHtml', response)
       })
     }
   },
