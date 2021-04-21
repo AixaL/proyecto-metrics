@@ -23,13 +23,13 @@
             <div class="col-span-4">
                 <p class="text-left text-xs mb-2">Titulo de la Campaña</p>
                 <form class="relative ">
-                <input v-model="tituloCamp" class="focus:border-light-blue-500 focus:ring-1 focus:ring-light-blue-500 focus:outline-none w-full text-sm text-black placeholder-gray-600 border border-gray-200 rounded-md py-2 pl-4 h-10" type="text" aria-label="Título" :placeholder="mail.name"  />
+                <input v-model="$store.state.tituloCamp" class="focus:border-light-blue-500 focus:ring-1 focus:ring-light-blue-500 focus:outline-none w-full text-sm text-black placeholder-gray-600 border border-gray-200 rounded-md py-2 pl-4 h-10" type="text" aria-label="Título" :placeholder="mail.name"  />
             </form>
             </div>
             <div class="col-span-2" >
                 <p class="text-left text-xs mb-2">Agencia</p>
                 <select @change="onChange(agenciaActual)" class="flex text-left cursor-pointer  w-full rounded-md border border-gray-200 shadow-sm px-2 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:border-light-blue-500 focus:ring-1 focus:ring-light-blue-500 focus:outline-none " v-model="agenciaActual" name="Seleccionar agencia" placeholder="Seleccionar agencia" id="agencia" v-bind="$attrs">
-                <option >Seleccionar agencia</option>
+                <option selected >Seleccionar agencia</option>
                 <option class="p-2 cursor-pointer font-semibold h-40 hover:bg-gray-100 hover:text-blue-600 border-b-2 border-gray-100" v-for="agencia in agencias_Array" :value="agencia" :key="agencia.id">{{agencia.cliente}}</option>
                 </select>
             </div>
@@ -52,13 +52,13 @@
                 </button>
             </div>
              -->
-            <div v-if="!disableCrear" class="col-span-2 flex h-10">
+            <div v-if="disableCrear==false" class="col-span-2 flex h-10">
                 <p class="text-left text-xs mb-2"></p>
-                <button :disabled="disableCrear" v-on:click="CreateCamp" class="buttonCreate mt-10">Crear Campaña</button>
+                <button v-on:click="CreateCamp" class="buttonCreate mt-10">Crear Campaña</button>
             </div>
-            <div v-if="disableCrear" class="col-span-2 flex h-10">
+            <div v-if="disableCrear==true" class="col-span-2 flex h-10">
                 
-                <button :disabled="disableCrear" class="buttonCreate bg-gray-400 hover:bg-gray-400 mt-10">Crear Campaña</button>
+                <button  class="buttonCreate bg-gray-400 hover:bg-gray-400 mt-10">Crear Campaña</button>
             </div>
             <!-- <div v-if="visible" v-on:mouseleave="visible=false" class=" col-span-2 -mt-4 overflow-y-auto h-40">
                      <div class="bg-white z-10 w-full shadow-md text-left">
@@ -118,8 +118,8 @@
 
             <!-- <ImagesVer v-if="images"/> -->
             <!-- <LinksVer v-if="links"/> -->
-
-        </div>
+    </div>
+   
 </template>
 
 <script>
@@ -163,23 +163,10 @@ export default {
 
      },
     methods: {
-        editS(){
-            if(this.$store.state.mail==''){
-                alert("Por favor Selecciona un mail")
-            }else{
-                 this.$store.state.moduleS=true
-            }
-           
-        },
-        SelectAgenciaA(agencia){
-            this.agenciaActual=agencia.cliente
-            this.visible=false
-              
-        },
         CreateCamp(){
             console.log(this.agenciaActual, this.tituloCamp)
-            if(this.tituloCamp==''){
-                this.tituloCamp= this.mail.name
+            if(this.$store.state.tituloCamp==''){
+                this.$store.state.tituloCamp= this.mail.name
             }
             if(this.agenciaActual=='' || this.agenciaActual=='Seleccionar agencia' ){
                 alert("Completa los campos para crear la campaña")
@@ -226,10 +213,13 @@ export default {
     
         },
         onChange(agen){
-            if(agen!='Seleccionar agencia'){
+            if(agen!='Seleccionar agencia' && this.$store.state.tituloCamp!='' && agen!="" && this.mail!=""){
                 this.disableCrear=false
+                this.newLink()
             }else{
                 this.disableCrear=true
+                 alert("Por favor Selecciona un mail")
+               
             }
             
         },

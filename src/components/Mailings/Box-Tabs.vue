@@ -5,7 +5,7 @@
             <div class="tab text-gray-400"><svg class="w-5 h-5 float-left mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg> Campañas</div>
             <div class="col-span-4"></div>
         </div>
-        <div class="bg-white w-full min-h-screen " style="height: 1095px;">
+        <div class="bg-white w-full min-h-screen " style="min-height: 1095px;">
             <div class="p-3">
                
                 <div class="grid grid-cols-5 bg-gray-100 text-xs p-2">
@@ -32,10 +32,17 @@
                 <div v-if="$store.state.NoResults">
                     <h2>No hay resultados</h2>
                 </div>
-                 <MailingsBox
+                <div v-if="$store.state.cargando==true" class="flex justify-center align-middle">
+                    <img   class="w-80 h-80 flex self-center items-center"  src="https://cdn.dribbble.com/users/108183/screenshots/4543219/loader_backinout.gif" alt="">
+                </div>
+                  
+                  <div v-if="$store.state.cargando==false">
+                      <MailingsBox 
                     v-for="mail of mailings" :key="mail.emailId" :name="mail.name" :time="mail.updatedTime"
                     :id="mail.emailId" :editStripo="mail.editorUrl" :mailS="mail" 
-                 /> 
+                 />
+                  </div>
+                  
             </div>
         </div>
     </div>
@@ -117,6 +124,8 @@ export default {
     setup() {
         const store = useStore()
         store.dispatch('getMailings')
+
+        document.getElementsByTagName('body')[0].classList.add('bg-gray-100')
         
         const mailings = computed(() => store.state.mailings)
         // var data=mailings.value
@@ -132,9 +141,18 @@ export default {
 
     
         // console.log(data.reverse())
+        
+        setTimeout(function(){ 
+
+             store.state.cargando =false
+            
+         }, 3000);
+
+         return {mailings}
+    
 
       
-        return {mailings}
+       
         
     }
 }

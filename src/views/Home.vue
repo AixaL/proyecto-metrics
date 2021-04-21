@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="bg-gray-300">
   <ModuleS v-if="$store.state.moduleS"/>
   <ModuleC v-if="$store.state.moduleC"/>
   <Nav/>
@@ -8,6 +8,7 @@
        <BoxTabs />  
     </div>
     <div class="pl-2 mt-20 col-span-7">
+      <div v-if="this.$store.state.disablePrev" class=" h-full bg-gray-300 opacity-50 absolute z-10 " style="width:56%; height:1130px"></div>
       <BoxPrev/>
     </div>
   </div>

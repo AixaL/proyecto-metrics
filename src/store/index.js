@@ -6,7 +6,8 @@ export default createStore({
     mailings:[],
     moduleS: false,
     moduleC:false,
-    nameCamp:'',
+    disablePrev: true,
+    tituloCamp:'',
     results:0,
     mail:'',
     nameMail:'',
@@ -17,6 +18,7 @@ export default createStore({
     NoResults: false,
     search: 'AC',
     agenciaActual:'',
+    cargando:true,
     agenciaName:'Volvo',
     StripoKey:'eyJhbGciOiJIUzI1NiJ9.eyJzZWN1cml0eUNvbnRleHQiOiJ7XCJhcGlLZXlcIjpcIjVkMzJmYWU5LTcyOGUtNGFmNy05MGU2LTM4MWI5OWI1MWE3YVwiLFwicHJvamVjdElkXCI6Mjc4NTcwfSJ9.ICQ9jJGnLRLI85QWCsMC-CzSt7XpN1grWcmaq_Zo6d0'
   },
@@ -29,22 +31,31 @@ export default createStore({
       }else{
         state.NoResults=false
       }
+      setTimeout(function(){ 
+
+        state.cargando =false
+       
+    }, 2000);
     },
     setStripoKey(state, key){
       state.StripoKey = key
     },
     setAgenciaName(state, name){
       state.agenciaName = name
+      state.tituloCamp=''
+      this.setAgencias
+      state.cargando=true
     },
     setMail(state, mailS){
+      console.log(mailS)
       state.mail = mailS
+      state.tituloCamp= mailS.name
      
     },
     setCreateCamp(state, datos){
       // console.log(datos.agencia, datos.titulo)
       state.agenciaActual=datos.agencia
       state.nameMail=state.mail.name
-      state.nameCamp=datos.titulo
     },
     setAgencias(state, data){
       state.agenciasMarca=data

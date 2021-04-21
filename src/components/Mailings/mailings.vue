@@ -58,7 +58,13 @@ export default {
             Vermailing(mail){
            console.log(mail)
            this.$store.commit('setMail', mail)
+             let datos={
+                        idCliente:85,
+                    }  
+
+            this.$store.dispatch('getHtml', datos)
            this.$store.state.html=''
+           this.$store.state.disablePrev=false
        }
        
     },
