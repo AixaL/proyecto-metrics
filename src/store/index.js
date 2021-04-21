@@ -14,10 +14,19 @@ export default createStore({
     html:'',
     agenciasMarca:'',
     linkPrev:'',
+    step1:'',
     imageScreen:'',
+    idCliente:'',
+    linkCampana:'',
+    links:'',
+    images:'',
+    urlLinks:'',
+    nombreLinks:'',
     NoResults: false,
+    previewLinks:false,
     search: 'AC',
     agenciaActual:'',
+    numError:0,
     cargando:true,
     agenciaName:'Volvo',
     StripoKey:'eyJhbGciOiJIUzI1NiJ9.eyJzZWN1cml0eUNvbnRleHQiOiJ7XCJhcGlLZXlcIjpcIjVkMzJmYWU5LTcyOGUtNGFmNy05MGU2LTM4MWI5OWI1MWE3YVwiLFwicHJvamVjdElkXCI6Mjc4NTcwfSJ9.ICQ9jJGnLRLI85QWCsMC-CzSt7XpN1grWcmaq_Zo6d0'
@@ -67,6 +76,50 @@ export default createStore({
     setHtml(state,data){
       console.log(data.data.response.html)
       state.html=data.data.response.html
+    },
+    setLinkCampana(state, data){
+      state.linkCampana= data.response.campaign_link
+      console.log(data.response.campaign_link)
+    },
+    setLinks(state, data){
+      state.links=data.response.precheck.links
+      state.images=data.response.precheck.images
+
+      let images= data.response.precheck.images
+      let links=data.response.precheck.links
+
+
+      // setTimeout(function(){ 
+        images.forEach(element => {
+            if(element.status==0 && element.status>303){
+                state.numError += 1
+            }
+            if(element.alt==''){
+                state.numError += 1
+            }
+        });
+
+        // var nombreLinks = Array()
+        // var urlLinks = Array()
+
+        links.forEach(element => {
+            // nombreLinks.push(element.label)
+            // urlLinks.push(element.url)
+            if(element.status==0 && element.status>303){
+                state.numError += 1
+            }
+            if(element.url==''){
+                state.numError += 1
+            }
+        });
+
+        // this.state.nombreLinks= nombreLinks
+        // this.state.urlLinks= urlLinks
+
+        console.log(state.numError)
+
+      // }, 7000);
+      
     }
   },
   actions: {
@@ -130,6 +183,7 @@ export default createStore({
     },
     async getHtml({commit},datos){
       var data = new FormData()
+      this.state.idCliente=datos.idCliente
       data.append('IdCliente', datos.idCliente)
       data.append('emailid',this.state.mail.emailId)
       data.append('stripojwt',this.state.StripoKey)
@@ -139,6 +193,95 @@ export default createStore({
   
         commit('setHtml', response)
       })
+    },
+    async getLinksVer({commit}){
+      var data = new FormData()
+      // data.append('IdCliente', '12' )
+      // data.append('emailid','2007841')
+      // data.append('stripojwt', 'eyJhbGciOiJIUzI1NiJ9.eyJzZWN1cml0eUNvbnRleHQiOiJ7XCJhcGlLZXlcIjpcIjVkMzJmYWU5LTcyOGUtNGFmNy05MGU2LTM4MWI5OWI1MWE3YVwiLFwicHJvamVjdElkXCI6Mjc4NTcwfSJ9.ICQ9jJGnLRLI85QWCsMC-CzSt7XpN1grWcmaq_Zo6d0')
+      data.append('IdCliente', this.state.idCliente )
+      data.append('emailid',this.state.mail.emailId )
+      data.append('stripojwt', this.state.StripoKey )
+      let link='https://www.adpdev.com/cs/api/mailing/preCampaignCheck'
+      await axios.post(link,data).then(function(response){
+        console.log(response)
+  
+        commit('setLinks', response.data)
+      })
+    },
+    async CreateSave({dispatch,state}){
+      
+      var data = new FormData()
+      // var nombreL =this.state.nombreLinks
+      // var urls = this.state.urlLinks 
+      
+      data.append('IdCliente', this.state.idCliente )
+      data.append('emailid',this.state.mail.emailId )
+      data.append('stripojwt', this.state.StripoKey )
+      data.append('nombreCampana', this.state.tituloCamp)
+      let link='https://www.adpdev.com/cs/api/mailing/createStripoCampaign'
+      await axios.post(link,data).then(function(response){
+        console.log(response)
+        let step1= response.data.response.step1
+
+        state.step1= step1
+        console.log(step1)
+
+        dispatch('SaveMatic')
+
+
+  
+        // commit('setLinks', response.data)
+      })
+
+    },
+    async SaveMatic({commit}){
+
+      var links= this.state.links
+      // var data = new FormData()
+          
+      // let link='http://localhost:8080/adp/metrics/includes/saveMatic.php?testing=true'
+      
+      var nombreLinks = Array()
+      var urlLinks = Array()
+
+      links.forEach(element => {
+            nombreLinks.push(element.label)
+            urlLinks.push(element.url)
+      });
+
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', 'http://localhost:8080/adp/metrics/includes/saveMatic.php?testing=true');
+      xhr.setRequestHeader('Content-Type', 'aplication/json')
+      xhr.send(JSON.stringify({
+        testing:true,
+        step1: this.state.step1,
+        nombreLinks: nombreLinks,
+        urlLinks: urlLinks
+      }))
+      xhr.onload = function(){
+        var data= JSON.parse(this.responseText)
+        console.log(data)
+
+        commit('setLinkCampana', data)
+      }
+
+
+
+
+      // data.append('testing',true)
+      // data.append('step1', step )
+      // data.append('nombreLinks',nombreLinks )
+      // data.append('urlLinks',urlLinks )
+
+
+      // await axios.post(link,data).then(function(response){
+      //   console.log(response)
+      
+      //   // commit('setLinkCampana')
+           
+      // })
+
     }
   },
   modules: {

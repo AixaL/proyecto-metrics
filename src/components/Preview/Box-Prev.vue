@@ -171,8 +171,10 @@ export default {
             if(this.agenciaActual=='' || this.agenciaActual=='Seleccionar agencia' ){
                 alert("Completa los campos para crear la campaña")
             }else{
-            this.$store.state.moduleC=true
-            this.$store.commit('setCreateCamp', { agencia :this.agenciaActual.cliente, titulo: this.tituloCamp } )
+            // this.$store.state.moduleC=true
+            this.$store.state.previewLinks=true
+            this.$store.dispatch('getLinksVer')
+            // this.$store.commit('setCreateCamp', { agencia :this.agenciaActual.cliente, titulo: this.tituloCamp } )
             }
             
         },

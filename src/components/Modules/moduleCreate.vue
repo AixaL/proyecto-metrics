@@ -1,27 +1,19 @@
 <template>
     <div class="fixed z-50 w-screen h-screen bg-opacity-70 bg-gray-400 flex justify-center items-center">
-        <div class="w-80 h-80 bg-white flex justify-center shadow-md rounded-md p-5">
+        <div class="w-72 h-60 bg-white flex justify-center shadow-md rounded-md p-2">
             <div class="grid grid-col-6">
                 <div>
                     <p class="text-xs text-left">{{$store.state.agenciaActual}}</p>
                 </div>
                 <div>
-                    <h3 class="relative text-lg font-bold text-left">Se creará la campaña "{{$store.state.nameCamp}}"</h3>
+                    <h3 class="relative text-lg font-bold text-left">Se ha creado la campaña <br> "{{$store.state.tituloCamp}}"</h3>
                 </div>
-                    
-                <div>
-                    <p class="text-sm text-left">Por favor escribe el titulo de la campaña para confirmar.</p>
-                    <p v-if="error" class="text-sm text-left text-red-600 pt-1">*El titulo de la campaña no coincide</p>
-                </div>
-                <div >
-                    <input v-model="campoTitulo" class="text-sm text-left w-full text-black bg-gray-200 h-9 p-2 focus:outline-none" type="text" placeholder="Título de la campaña">
-                </div>
-                <div class="grid grid-col-2 grid-flow-col gap-4">
+                <div class="grid grid-col-2 grid-flow-col gap-2">
                     <div>
-                         <button v-on:click="CrearCamp()" class="buttonCreate buttonGoStripo" >Confirmar</button>
+                        <button class="buttonCreate bg-blue-600 hover:bg-blue-600" v-on:click="$store.state.previewLinks=false; this.$store.state.moduleC=false"><svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>Nueva Campaña</button>
                     </div>
                     <div>
-                        <button class="buttonCancel" v-on:click="$store.state.moduleC=false">Cancelar</button>
+                         <button class="buttonCreate" ><a :src="$store.state.linkCampana"></a>Ver la campaña</button>
                     </div>
                 </div>
             </div>
