@@ -7,12 +7,12 @@
   <div class='grid grid-cols-12 bg-gray-100 p-5'>
     <!-- <div class="col-span-12 bg-white h-20 mt-11"></div> -->
     <!-- mt-20 -->
-    <div class="pr-2 col-span-5 mt-20">
+    <div class="pr-2 col-span-5 mt-20 " style="">
        <BoxTabs v-if="$store.state.previewLinks==false" />  
        <LinksVer v-if="$store.state.previewLinks" class="-mt-20"/>
     </div>
-    <div class="pl-2 col-span-7 mt-20" >
-      <div v-if="this.$store.state.disablePrev" class=" h-full bg-gray-300 opacity-50 absolute z-10 " style="width:56%; height:1130px"></div>
+    <div class="pl-2 col-span-7 mt-20 "  style="">
+      <div v-if="this.$store.state.disablePrev" class=" bg-gray-300 opacity-50 absolute z-10 " style="width:60%; height:100%"></div>
       <div v-if="false" class=" h-full bg-gray-300 opacity-50 absolute z-10 " style="width:56%; height:1130px"></div>
       <BoxPrev v-if="$store.state.previewLinks==false"/>
       <ImagesVer v-if="$store.state.previewLinks" class="-mt-20"/>
@@ -50,6 +50,10 @@ export default {
 <style >
 html {
   scroll-behavior: smooth;
+}
+body{
+  overflow-y: hidden;
+  overflow-x: hidden;
 }
   
 </style>

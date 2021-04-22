@@ -66,7 +66,7 @@ export default {
 
            this.$store.commit('setMail', mail)
              let datos={
-                        idCliente:85,
+                        idCliente:0,
                     }  
             console.log(document.getElementById(mail.emailId))
             document.getElementById(mail.emailId).classList.add("border-l-4", "border-blue-600", "bg-gray-100")

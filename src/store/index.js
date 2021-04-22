@@ -27,7 +27,7 @@ export default createStore({
     previewLinks:false,
     search: 'AC',
     agenciaActual:'',
-    numError:0,
+    numError:1,
     cargando:true,
     cargando2:true,
     agenciaName:'Volvo',
@@ -90,14 +90,14 @@ export default createStore({
       let images= data.response.precheck.images
       let links=data.response.precheck.links
 
-
+      let numError=0
       // setTimeout(function(){ 
         images.forEach(element => {
             if(element.status==0 && element.status>303){
-                state.numError += 1
+                numError += 1
             }
             if(element.alt==''){
-                state.numError += 1
+                numError += 1
             }
         });
 
@@ -108,13 +108,19 @@ export default createStore({
             // nombreLinks.push(element.label)
             // urlLinks.push(element.url)
             if(element.status==0 && element.status>303){
-                state.numError += 1
+                numError += 1
             }
             if(element.url==''){
-                state.numError += 1
+                numError += 1
             }
         });
 
+
+        if(numError==0){
+          state.numError=0
+        }else{
+          state.numError=numError
+        }
         // this.state.nombreLinks= nombreLinks
         // this.state.urlLinks= urlLinks
 

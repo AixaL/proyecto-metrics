@@ -1,21 +1,29 @@
 <template>
-    <div style="height:800px">
+    <div class="h-full"  >
         <div class="grid grid-cols-9">
             <div class="tab tab-select"><svg class="w-5 h-5 float-left mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg> Mailings</div>
-            <div class="tab text-gray-400"><svg class="w-5 h-5 float-left mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg> Campañas</div>
+            <div class="tab text-gray-400 hover:bg-gray-200 hover:text-gray-400"><svg class="w-5 h-5 float-left mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg> Campañas</div>
             <div class="col-span-4"></div>
         </div>
-        <div class="bg-white w-full min-h-screen " style="min-height: 1095px;">
+        <div class="bg-white w-full " style="height:33%" >
             <div class="p-3">
                
                 <div class="grid grid-cols-5 bg-gray-100 text-xs p-2">
                     
-                    <div v-on:click="visible=true" class="cursor-pointer col-span-3  text-gray-600 text-left self-center font-semibold justify-center "><p class="float-left mr-2 self-center">{{orden}}</p><svg class="flex w-4 h-4 self-center" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></div>
+                    <div  class=" col-span-3  text-gray-600 text-left self-center font-semibold justify-center ">
+                        <button v-on:mouseover="visible=true" class="cursor-pointer border-2 border-gray-200 p-2 rounded-md shadow-sm w-36 focus:outline-none flex justify-items-end justify-start hover:bg-white hover:text-blue-500 text-blue-800 font-semibold">
+                            <p class="float-left mr-2 self-center">{{orden}}</p><svg class="flex w-4 h-4 self-end" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                    </div>
                     <!-- <div></div> -->
-                    <div class="flex justify-end">
-                        <svg v-on:click="refreshMailings()" class="w-4 h-4 justify-self-end place-self-end cursor-pointer hover:text-blue-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                    <div class="text-gray-500 text-right text-sm self-center justify-self-end -mr-12 font-semibold">Resultados: {{$store.state.results}}</div>
+                    <div class="flex justify-end self-center">
+                        <button v-on:click="refreshMailings()" class=" cursor-pointer border-2 border-gray-200 p-2 rounded-md shadow-sm w-10 focus:outline-none flex justify-items-end justify-start hover:bg-white hover:text-blue-500 text-blue-800 ">
+                            <svg  class="cursor-pointer w-5 h-5 justify-self-end place-self-end" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                            </svg>
+                        </button>
                     </div>  
-                    <div class="text-gray-500 text-right text-xs self-center">Resultados: {{$store.state.results}}</div>
+                    
                     <!-- mailings.data.length -->
                 </div>
                 <div v-if="visible" v-on:mouseleave="visible=false" class="absolute bg-gray-100 z-10 rounded-sm shadow-md">
@@ -28,12 +36,12 @@
             </div>
             </div>
             
-            <div >
+            <div class="bg-white overflow-y-scroll " style="height: 65vh">
                 <div v-if="$store.state.NoResults">
                     <h2>No hay resultados</h2>
                 </div>
                 <div v-if="$store.state.cargando==true" class="flex justify-center align-middle">
-                    <img   class="w-80 h-80 flex self-center items-center"  src="https://cdn.dribbble.com/users/108183/screenshots/4543219/loader_backinout.gif" alt="">
+                    <img   class="w-60 h-60 flex self-center items-center"  src="https://cdn.dribbble.com/users/108183/screenshots/4543219/loader_backinout.gif" alt="">
                 </div>
                   
                   <div v-if="$store.state.cargando==false">
