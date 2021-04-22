@@ -27,6 +27,7 @@ export default {
     methods: {
         regresar(){
             this.$store.state.previewLinks=false
+            this.$store.state.cargando2=true
         },
         CrearCampana(){
             this.$store.dispatch('CreateSave')

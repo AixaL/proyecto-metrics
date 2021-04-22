@@ -4,7 +4,7 @@ import axios from 'axios'
 export default createStore({
   state: {
     mailings:[],
-    moduleS: false,
+    moduleS: true,
     moduleC:false,
     disablePrev: true,
     tituloCamp:'',
@@ -28,6 +28,7 @@ export default createStore({
     agenciaActual:'',
     numError:0,
     cargando:true,
+    cargando2:true,
     agenciaName:'Volvo',
     StripoKey:'eyJhbGciOiJIUzI1NiJ9.eyJzZWN1cml0eUNvbnRleHQiOiJ7XCJhcGlLZXlcIjpcIjVkMzJmYWU5LTcyOGUtNGFmNy05MGU2LTM4MWI5OWI1MWE3YVwiLFwicHJvamVjdElkXCI6Mjc4NTcwfSJ9.ICQ9jJGnLRLI85QWCsMC-CzSt7XpN1grWcmaq_Zo6d0'
   },

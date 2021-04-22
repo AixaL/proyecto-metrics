@@ -6,7 +6,10 @@
                     </div>
 
                     <div class="col-span-4 pb-2">
-                          <div class="w-full">
+                        <div v-if="$store.state.cargando2==true" class="flex justify-center align-middle">
+                            <img   class="w-80 h-80 flex self-center items-center"  src="https://cdn.dribbble.com/users/108183/screenshots/4543219/loader_backinout.gif" alt="">
+                        </div>
+                          <div v-if="$store.state.cargando2==false" class="w-full">
                                <table class="table-auto w-full text-left border-separate divide-y-4" cellspacing="10">
                                    <thead>
                                        <tr class="text-left text-sm">
@@ -65,6 +68,12 @@ export default {
         // store.dispatch('getLinksVer')
         // const links_arr = computed(() => store.state.links)
         const images_arr = computed(() => store.state.images)
+
+        setTimeout(function(){ 
+
+             store.state.cargando2 =false
+            
+         }, 6500);
         // console.log(links_arr)
         console.log(images_arr)
          return { images_arr}

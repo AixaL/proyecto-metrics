@@ -1,6 +1,6 @@
 <template>
    <div class="col-span-4 w-full  bg-white p-4">
-                <div class="grid grid-cols-4 gap-1">
+                <div  class="grid grid-cols-4 gap-1">
                     <div class="col-span-4 text-left">
                         <p class="text-md font-semibold">Etiquetas especiales</p>
                     </div>
@@ -27,7 +27,10 @@
                             <p class="font-semibold">Verificación de links</p>
                         </div>
                         <div class="col-span-4  pb-2">
-                            <div class="w-full">
+                            <div v-if="$store.state.cargando2==true" class="flex justify-center align-middle">
+                                <img   class="w-80 h-80 flex self-center items-center"  src="https://cdn.dribbble.com/users/108183/screenshots/4543219/loader_backinout.gif" alt="">
+                            </div>
+                            <div v-if="$store.state.cargando2==false" class="w-full">
                                <table class="table-auto w-full text-left border-separate divide-y-4" cellspacing="10">
                                    <thead>
                                        <tr class="text-left text-sm">
@@ -77,6 +80,12 @@ export default {
         const store = useStore()
         // store.dispatch('getLinksVer')
         const links_arr = computed(() => store.state.links)
+
+         setTimeout(function(){ 
+
+             store.state.cargando2 =false
+            
+         }, 6500);
 
         // let links = store.state.links
         // let images = store.state.images

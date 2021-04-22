@@ -4,10 +4,10 @@
             <div class="h-15 self-center ">
                 <button v-on:click="visible=true"  type="button" class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:border-light-blue-500 focus:ring-1 focus:ring-light-blue-500 focus:outline-none " id="options-menu" aria-expanded="true" aria-haspopup="true">
                 <div class="w-9 mr-3 ">
-                      <img :src="imgAgencia" alt="">
+                      <img :src="projects[$store.state.agenciaName].image" alt="">
                 </div>
                 <div class="flex flex-wrap content-center self-center ">
-                    <p>{{nombreAgencia}}</p>
+                    <p>{{$store.state.agenciaName}}</p>
                 </div>
                 <svg class="mr-1 ml-2 h-5 w-5 self-center " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                     <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
@@ -45,6 +45,7 @@
         components:[],
         data: ()=> ({
                 visible: false,
+                agenciaa:'',
                 nombreAgencia:'Volvo',
                 imgAgencia:'https://pbs.twimg.com/profile_images/1353905413557776384/1xd7nron_400x400.jpg',
                 projects:{
@@ -78,6 +79,7 @@
 
              clickProyecto(agen){
                 
+                this.agenciaa=agen
                 // store.commit('setStripoKey', agen.key)
                 this.nombreAgencia=agen.name
                 this.imgAgencia=agen.image
@@ -88,6 +90,7 @@
                 this.$store.dispatch('getAgen')
                 this.$store.state.mail=''
                 this.$store.state.linkPrev=''
+                this.$store.state.moduleS=false
 
                 // console.log(agen.key)
                 // ...Vuex.mapMutations([])
