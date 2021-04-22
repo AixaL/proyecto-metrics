@@ -1,7 +1,7 @@
 <template>
     <div>
     
-        <div class=" mailings-box"  v-on:click="Vermailing(mailS)">
+        <div class=" mailings-box border-b-0" :id="mailS.emailId"  v-on:click="Vermailing(mailS)">
             <div class="w-full text-gray-700 font-semibold text-md z-0 ">
                 <h4 v-on:click="verMail"  class="float-left">{{name}}</h4>
                 <button v-on:click="visible=true, $store.state.linkPrev=mailS.previewUrl" class="btn-mailings"><svg class="w-4 h-4 self-center place-self-center justify-self-center" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"></path></svg></button>
@@ -21,6 +21,7 @@
 </template>
 
 <script>
+// import {useStore} from 'vuex'
 export default {
     props:{
         time:{
@@ -56,24 +57,41 @@ export default {
                  this.$store.state.moduleS=true
             },
             Vermailing(mail){
-           console.log(mail)
+        //    console.log(mail)
+        if(document.getElementById(this.$store.state.idSelected)){
+             document.getElementById(this.$store.state.idSelected).classList.remove("border-l-4", "border-blue-600", "bg-gray-100")
+        }
+           
+            
+
            this.$store.commit('setMail', mail)
              let datos={
                         idCliente:85,
                     }  
-
+            console.log(document.getElementById(mail.emailId))
+            document.getElementById(mail.emailId).classList.add("border-l-4", "border-blue-600", "bg-gray-100")
+            this.$store.state.idSelected=mail.emailId
             this.$store.dispatch('getHtml', datos)
            this.$store.state.html=''
            this.$store.state.disablePrev=false
        }
        
     },
+     mounted() {             
+         console.log('mounted!')       
+         if(document.getElementById(this.$store.state.idSelected)) {
+            document.getElementById(this.$store.state.idSelected).classList.add("border-l-4", "border-blue-600", "bg-gray-100")
+         }
+      },   
     setup(props) {
         // console.log(props)
+        // const store = useStore()
+        // document.getElementById(store.state.idSelected).classList.add("border-l-4", "border-blue-600", "bg-gray-100")
         let newTime= props.time.split("T",1).join('')
 
         var fecha = new Date(newTime);
         var options = { year: 'numeric', month: 'long', day: 'numeric' };
+        
 
         newTime = fecha.toLocaleDateString("es-ES", options)
         return({newTime})

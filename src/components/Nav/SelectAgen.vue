@@ -71,7 +71,8 @@
                         id:4,
                         name:'Audi',
                         key:'eyJhbGciOiJIUzI1NiJ9.eyJzZWN1cml0eUNvbnRleHQiOiJ7XCJhcGlLZXlcIjpcIjhlNGVhZmI5LTA3NGMtNGJiMy1hYWNkLWQ2NDI3Y2QwMWQ2OFwiLFwicHJvamVjdElkXCI6NDA2MDAxfSJ9.hoX6DBGq7DKL0UC5jlONUGH0o3QiO6gNz1QGWjzaIqU',
-                        image:'https://i.pinimg.com/originals/13/ab/5f/13ab5fe6c536ff7125432ece35b8b217.png'
+                        image:'https://i.pinimg.com/originals/6c/92/49/6c92492ade0a6883809b9ea3ad429770.png'
+                        // image:'http://assets.stickpng.com/images/580b585b2edbce24c47b2c18.png'
                     },
                 }
             }),
@@ -91,6 +92,7 @@
                 this.$store.state.mail=''
                 this.$store.state.linkPrev=''
                 this.$store.state.moduleS=false
+                this.$store.state.html=''
 
                 // console.log(agen.key)
                 // ...Vuex.mapMutations([])

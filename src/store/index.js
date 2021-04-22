@@ -7,6 +7,7 @@ export default createStore({
     moduleS: true,
     moduleC:false,
     disablePrev: true,
+    idSelected:'',
     tituloCamp:'',
     results:0,
     mail:'',
@@ -57,7 +58,7 @@ export default createStore({
       state.cargando=true
     },
     setMail(state, mailS){
-      console.log(mailS)
+      // console.log(mailS)
       state.mail = mailS
       state.tituloCamp= mailS.name
      
@@ -71,11 +72,11 @@ export default createStore({
       state.agenciasMarca=data
     },
     setScreenshot(state, data){
-      console.log(data.data.url)
+      // console.log(data.data.url)
       state.imageScreen=data.data.url
     },
     setHtml(state,data){
-      console.log(data.data.response.html)
+      // console.log(data.data.response.html)
       state.html=data.data.response.html
     },
     setLinkCampana(state, data){

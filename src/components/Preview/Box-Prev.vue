@@ -1,7 +1,7 @@
 <template>
     <div ref="previo" class="grid grid-cols-4  bg-white p-3 gap-3">
             <div class="col-span-2 ">
-                <p class="text-left text-lg font-bold text-black">{{mail.name}}</p>
+                <p class="text-left text-xl font-bold text-black">{{mail.name}}</p>
             </div>
              <div class="flex justify-center items-center">
                
@@ -21,14 +21,14 @@
             <div class="col-span-4 h-1 border-b-2 border-gray-100"></div>
 
             <div class="col-span-4">
-                <p class="text-left text-xs mb-2">Titulo de la Campaña</p>
+                <p class="text-left text-xs mb-2">Título de la Campaña</p>
                 <form class="relative ">
-                <input v-model="$store.state.tituloCamp" class="focus:border-light-blue-500 focus:ring-1 focus:ring-light-blue-500 focus:outline-none w-full text-sm text-black placeholder-gray-600 border border-gray-200 rounded-md py-2 pl-4 h-10" type="text" aria-label="Título" :placeholder="mail.name"  />
+                <input v-model="$store.state.tituloCamp" class="focus:border-light-blue-500 focus:ring-1 focus:ring-light-blue-500 focus:outline-none w-full text-md text-black placeholder-gray-600 border border-gray-200 rounded-md py-2 pl-4 h-10" type="text" aria-label="Título" :placeholder="mail.name"  />
             </form>
             </div>
             <div class="col-span-2" >
                 <p class="text-left text-xs mb-2">Agencia</p>
-                <select @change="onChange(agenciaActual)" class="flex text-left cursor-pointer  w-full rounded-md border border-gray-200 shadow-sm px-2 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:border-light-blue-500 focus:ring-1 focus:ring-light-blue-500 focus:outline-none " v-model="agenciaActual" name="Seleccionar agencia" placeholder="Seleccionar agencia" id="agencia" v-bind="$attrs">
+                <select @change="onChange(agenciaActual)" class="flex text-left cursor-pointer  w-full rounded-md border border-gray-200 shadow-sm px-2 py-2 bg-white text-md font-medium text-gray-700 hover:bg-gray-50 focus:border-light-blue-500 focus:ring-1 focus:ring-light-blue-500 focus:outline-none " v-model="agenciaActual" name="Seleccionar agencia" placeholder="Seleccionar agencia" id="agencia" v-bind="$attrs">
                 <option selected >Seleccionar agencia</option>
                 <option class="p-2 cursor-pointer font-semibold h-40 hover:bg-gray-100 hover:text-blue-600 border-b-2 border-gray-100" v-for="agencia in agencias_Array" :value="agencia" :key="agencia.id">{{agencia.cliente}}</option>
                 </select>
@@ -217,6 +217,7 @@ export default {
         onChange(agen){
             if(agen!='Seleccionar agencia' && this.$store.state.tituloCamp!='' && agen!="" && this.mail!=""){
                 this.disableCrear=false
+                window.scrollTo(0,250)
                 this.newLink()
             }else{
                 this.disableCrear=true
