@@ -16,7 +16,7 @@
                         </button>
                     </div>
                     <!-- <div></div> -->
-                    <div class="text-gray-500 text-right text-sm self-center justify-self-end -mr-12 font-semibold">Resultados: {{$store.state.results}}</div>
+                    <div v-if="$store.state.moduleS==false" class="text-gray-500 text-right text-sm self-center justify-self-end -mr-12 font-semibold">Resultados: {{$store.state.results}}</div>
                     <div class="flex justify-end self-center">
                         <button v-on:click="refreshMailings()" class=" cursor-pointer border-2 border-gray-200 p-2 rounded-md shadow-sm w-10 focus:outline-none flex justify-items-end justify-start hover:bg-white hover:text-blue-500 text-blue-800 ">
                             <svg  class="cursor-pointer w-5 h-5 justify-self-end place-self-end" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
@@ -36,7 +36,7 @@
             </div>
             </div>
             
-            <div class="bg-white overflow-y-scroll " style="height: 65vh">
+            <div class="bg-white overflow-y-scroll " style="height: 65vh" v-if="$store.state.moduleS==false">
                 <div v-if="$store.state.NoResults">
                     <h2>No hay resultados</h2>
                 </div>

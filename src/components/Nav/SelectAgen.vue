@@ -93,7 +93,8 @@
                 this.$store.state.linkPrev=''
                 this.$store.state.moduleS=false
                 this.$store.state.html=''
-
+                sessionStorage.setItem('agenciaKey',agen.key );
+                sessionStorage.setItem('agenciaName',agen.name);
                 // console.log(agen.key)
                 // ...Vuex.mapMutations([])
             },

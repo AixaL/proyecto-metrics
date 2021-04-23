@@ -23,7 +23,7 @@
                                        <tr v-for="image of images_arr" :key="image.id" class="pb-4 pt-4">
                                            <td class="w-1/12"> 
                                                
-                                                <svg v-if="image.status==200 " class="w-5 h-5 text-green-800 float-left" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                                <svg v-if="image.status==200 && image.alt!='' " class="w-5 h-5 text-green-800 float-left" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                                                 <svg v-else class="w-5 h-5 text-red-800 float-left " fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg> 
                                                 <p class="text-xs float-left ml-2">({{image.status}})</p>
                                            </td>

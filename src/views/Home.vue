@@ -44,6 +44,28 @@ export default {
     LinksVer,
     ImagesVer,
     PrecheckLinks
+  },
+  beforeMount() {
+    if(sessionStorage.getItem("agenciaKey") && sessionStorage.getItem("agenciaName")){
+      console.log("yes!!")
+      this.$store.state.moduleS=false
+      this.$store.state.StripoKey=sessionStorage.getItem("agenciaKey")
+      this.$store.state.agenciaName=sessionStorage.getItem("agenciaName")
+    }else{
+      console.log("Nooo")
+    }
+
+    if(sessionStorage.getItem('mailing')){
+      let nn = JSON.parse(sessionStorage.getItem('mailing'))
+      this.$store.state.mail= nn
+      this.$store.state.tituloCamp= this.$store.state.mail.name
+      this.$store.state.disablePrev=false
+      let datos={
+                                idCliente:0,
+                            } 
+      this.$store.dispatch('getHtml', datos)
+    }
+   
   }
 }
 </script>

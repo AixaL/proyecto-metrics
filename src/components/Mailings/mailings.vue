@@ -58,23 +58,25 @@ export default {
             },
             Vermailing(mail){
         //    console.log(mail)
-        if(document.getElementById(this.$store.state.idSelected)){
-             document.getElementById(this.$store.state.idSelected).classList.remove("border-l-4", "border-blue-600", "bg-gray-100")
-        }
-           
-            
+                if(document.getElementById(this.$store.state.idSelected)){
+                    document.getElementById(this.$store.state.idSelected).classList.remove("border-l-4", "border-blue-600", "bg-gray-100")
+                }
+                
+                    
 
-           this.$store.commit('setMail', mail)
-             let datos={
-                        idCliente:0,
-                    }  
-            console.log(document.getElementById(mail.emailId))
-            document.getElementById(mail.emailId).classList.add("border-l-4", "border-blue-600", "bg-gray-100")
-            this.$store.state.idSelected=mail.emailId
-            this.$store.dispatch('getHtml', datos)
-           this.$store.state.html=''
-           this.$store.state.disablePrev=false
-       }
+                this.$store.commit('setMail', mail)
+                    let datos={
+                                idCliente:0,
+                            }  
+                    console.log(document.getElementById(mail.emailId))
+                    document.getElementById(mail.emailId).classList.add("border-l-4", "border-blue-600", "bg-gray-100")
+                    this.$store.state.idSelected=mail.emailId
+                    this.$store.dispatch('getHtml', datos)
+                    this.$store.state.html=''
+                    this.$store.state.disablePrev=false
+
+                    sessionStorage.setItem('mailing',JSON.stringify(mail));
+            }
        
     },
      mounted() {             

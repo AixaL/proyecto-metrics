@@ -108,12 +108,13 @@
                         <button v-on:click="verMail" class="btn-edit-arch h-full">Ver mail <svg class="w-4 h-4 float-left ml-2 self-center"  fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></button>
                     </div> -->
                 </div>
-                <div class="col-span-4 mt-6">
-                    <div class="grid grid-cols-4 flex justify-center ">
-                         <div  class="col-span-4 border-2 border-gray-200 rounded-md w-full min-h-screen h-screen  flex justify-self-center" style="height: 800px" :class="{PrevMobile:mobile}" >
-                
-                        <!-- <img class="w-80 h-80 flex self-center items-center" :class="{loading:cargando}" src="https://cdn.dribbble.com/users/108183/screenshots/4543219/loader_backinout.gif" alt=""> -->
-                            <iframe id="frame" frameborder="0" width="100%" height="100%" class="" :srcdoc="$store.state.html"  v-on:loaded="cargando=true" crossorigin="anonymous" ></iframe>
+                <div class="col-span-4 mt-6 flex items-center justify-center w-full">
+                    <div :class="{PrevMobile:mobile}" class="grid grid-cols-4 flex justify-center w-full">
+                         <div id="divFrame" class="col-span-4 border-2 border-gray-200 rounded-md w-full min-h-screen h-screen  flex justify-self-center items-center justify-center h-96">
+                             
+                        <img v-if="$store.state.html=='' && $store.state.mail!=''" class="w-60 h-60 flex self-start items-center" src="https://cdn.dribbble.com/users/108183/screenshots/4543219/loader_backinout.gif" alt="">
+                    
+                        <iframe v-if="$store.state.html!=''" id="frame" frameborder="0" width="100%" height="100%" :srcdoc="$store.state.html"  class="overflow-y-hidden" v-on:load="medidasIframe" crossorigin="anonymous" scrolling="no"></iframe>
                         </div>
                     </div>
                 </div>
@@ -180,6 +181,20 @@ export default {
             // this.$store.commit('setCreateCamp', { agencia :this.agenciaActual.cliente, titulo: this.tituloCamp } )
             }
             
+        },
+        medidasIframe(){
+            // console.log(document.getElementById('frame').document)
+            if(this.$store.state.html!=''){
+                console.log(document.getElementById('frame').contentWindow.window.document.scrollingElement.offsetHeight)
+
+                let hei = document.getElementById('frame').contentWindow.window.document.scrollingElement.offsetHeight
+
+                document.getElementById('divFrame').style.height= `${hei}px `
+                console.log(`${hei}px `)
+
+                console.log(document.getElementById('divFrame'))
+            
+     }
         },
         newLink(){
            
