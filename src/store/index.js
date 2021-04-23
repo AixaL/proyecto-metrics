@@ -23,11 +23,16 @@ export default createStore({
     images:'',
     urlLinks:'',
     nombreLinks:'',
+    LinksOk:'',
+    linksEspeciales:'',
     NoResults: false,
     previewLinks:false,
     search: 'AC',
     agenciaActual:'',
     numError:1,
+    numErrorAlt:0,
+    numErrorLinks:0,
+    numErrorUrlmg:0,
     cargando:true,
     cargando2:true,
     agenciaName:'Volvo',
@@ -90,36 +95,45 @@ export default createStore({
       let images= data.response.precheck.images
       let links=data.response.precheck.links
 
-      let numError=0
+      let numErrorLinks=Array()
+      let LinksOk= Array()
+      let linksEspeciales= Array()
+      let numErrorAlt=0
+      let numErrorUrlmg=0
+      // let numError=0
       // setTimeout(function(){ 
         images.forEach(element => {
-            if(element.status==0 && element.status>303){
-                numError += 1
-            }
-            if(element.alt==''){
-                numError += 1
+            if(element.status==0 || element.status>=400){
+              numErrorUrlmg += 1
+            }else if(element.alt==''){
+              numErrorAlt += 1
             }
         });
 
-        // var nombreLinks = Array()
-        // var urlLinks = Array()
 
         links.forEach(element => {
-            // nombreLinks.push(element.label)
-            // urlLinks.push(element.url)
-            if(element.status==0 && element.status>303){
-                numError += 1
-            }
-            if(element.url==''){
-                numError += 1
+            if(element.status==0 || element.status>=400){
+              numErrorLinks.push(element) 
+            }else if(element.url==''){
+              numErrorLinks.push(element) 
+            }else if(element.label=='{{open}}' || element.label=='{{html}}' || element.label=='{{unsubscribe}}'){
+              console.log(element)
+              linksEspeciales.push(element)
+            }else{
+              LinksOk.push(element)
             }
         });
+        state.numErrorAlt=numErrorAlt
+        state.numErrorLinks=numErrorLinks
+        state.numErrorUrlmg=numErrorUrlmg
+        state.LinksOk=LinksOk
+        state.linksEspeciales=linksEspeciales
 
-
-        if(numError==0){
+        let total= numErrorLinks.length+numErrorAlt+numErrorUrlmg
+        if(total==0){
           state.numError=0
         }else{
-          state.numError=numError
+          state.numError=total
         }
         // this.state.nombreLinks= nombreLinks
         // this.state.urlLinks= urlLinks
@@ -241,6 +255,12 @@ export default createStore({
   
         // commit('setLinks', response.data)
       })
+
+      setTimeout(function(){ 
+        console.log(state.moduleC)
+        state.moduleC=true
+        
+    }, 3000);
 
     },
     async SaveMatic({commit}){
