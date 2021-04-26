@@ -24,6 +24,7 @@ export default createStore({
     urlLinks:'',
     nombreLinks:'',
     LinksOk:'',
+    imagesOk:'',
     linksEspeciales:'',
     NoResults: false,
     previewLinks:false,
@@ -90,7 +91,6 @@ export default createStore({
     },
     setLinks(state, data){
       state.links=data.response.precheck.links
-      state.images=data.response.precheck.images
 
       let images= data.response.precheck.images
       let links=data.response.precheck.links
@@ -98,17 +98,21 @@ export default createStore({
       let numErrorLinks=Array()
       let LinksOk= Array()
       let linksEspeciales= Array()
-      let numErrorAlt=0
-      let numErrorUrlmg=0
+      let numErrorAlt=Array()
+      let numErrorUrlmg= Array()
+      let imagesOk= Array()
       // let numError=0
       // setTimeout(function(){ 
         images.forEach(element => {
             if(element.status==0 || element.status>=400){
-              numErrorUrlmg += 1
+              numErrorUrlmg.push(element)
             }else if(element.alt==''){
-              numErrorAlt += 1
+              numErrorAlt.push(element)
+            }else{
+              imagesOk.push(element)
             }
         });
+
 
 
         links.forEach(element => {
@@ -127,9 +131,12 @@ export default createStore({
         state.numErrorLinks=numErrorLinks
         state.numErrorUrlmg=numErrorUrlmg
         state.LinksOk=LinksOk
+        state.imagesOk=imagesOk
         state.linksEspeciales=linksEspeciales
 
-        let total= numErrorLinks.length+numErrorAlt+numErrorUrlmg
+        state.images=numErrorUrlmg.concat(numErrorAlt)
+
+        let total= numErrorLinks.length+numErrorAlt.length+numErrorUrlmg.length
         if(total==0){
           state.numError=0
         }else{

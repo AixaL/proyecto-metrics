@@ -13,8 +13,9 @@
                                         <p class=" p-2 text-sm font-semibold text-left w-9/12 float-left ">{{openText}}</p>
                                     </div>
                                     <div v-else class="mt-2 border-b-2 border-red-700  h-10">
-                                            <p class=" p-2 text-sm font-semibold text-left w-9/12 float-left ">{{openText}}</p>
-                                            <p class="w-3/12 float-left flex align-middle h-full justify-center items-center"><svg class="w-4 h-4 text-red-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></p>
+                                         <p class="w-3/12 float-left flex align-middle h-full justify-center items-center"><svg class="w-4 h-4 text-red-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></p>
+                                        <p class=" p-2 text-sm font-semibold text-left w-9/12 float-left ">{{openText}}</p>
+                                           
                                     </div>
                                 </div>
                                 <div class="w-40 mr-12">
@@ -23,8 +24,9 @@
                                         <p class=" p-2 text-sm font-semibold text-left w-9/12 float-left ">{{unsubscribeText}}</p>
                                     </div>
                                     <div v-else class="mt-2 border-b-2 border-red-700  h-10">
+                                        <p class="w-3/12 float-left flex align-middle h-full justify-center items-center"><svg class="w-4 h-4 text-red-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></p>
                                             <p class=" p-2 text-sm font-semibold text-left w-9/12 float-left ">{{unsubscribeText}}</p>
-                                            <p class="w-3/12 float-left flex align-middle h-full justify-center items-center"><svg class="w-4 h-4 text-red-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></p>
+                                            
                                     </div>
                                 </div>
                                 <div  class="w-40 mr-12">
@@ -33,8 +35,9 @@
                                         <p class=" p-2 text-sm font-semibold text-left w-9/12 float-left ">{{htmlText}}</p>
                                     </div>
                                     <div v-else class="mt-2 border-b-2 border-red-700  h-10">
+                                         <p class="w-3/12 float-left flex align-middle h-full justify-center items-center"><svg class="w-4 h-4 text-red-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></p>
                                             <p class=" p-2 text-sm font-semibold text-left w-9/12 float-left ">{{htmlText}}</p>
-                                            <p class="w-3/12 float-left flex align-middle h-full justify-center items-center"><svg class="w-4 h-4 text-red-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></p>
+                                           
                                     </div>
                                 </div>    
                         </div>  
@@ -56,7 +59,7 @@
                                <table class="table-auto w-full text-left border-separate divide-y-4" cellspacing="10">
                                    <thead>
                                        <tr class="text-left text-sm">
-                                           <th>x / s</th>
+                                           <th>Status</th>
                                            <th>Nombre</th>
                                            <th>Url</th>
                                        </tr>
