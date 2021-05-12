@@ -36,7 +36,7 @@
             </div>
             </div>
             
-            <div class="bg-white overflow-y-scroll " style="height: 65vh" v-if="$store.state.moduleS==false">
+            <div class="bg-white overflow-y-scroll " style="height: 70vh" v-if="$store.state.moduleS==false">
                 <div v-if="$store.state.NoResults">
                     <h2>No hay resultados</h2>
                 </div>
